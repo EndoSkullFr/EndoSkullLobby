@@ -21,10 +21,8 @@ public class ParkourTask extends BukkitRunnable {
     @Override
     public void run() {
         if (i > 100) {
-            System.out.println("update");
             Bukkit.getScheduler().runTaskAsynchronously(main, () -> {
                 for (Parkour parkour : main.getParkours()) {
-                    System.out.println(parkour.getName());
                     parkour.updateHolograms();
                 }
             });
