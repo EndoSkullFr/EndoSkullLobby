@@ -31,6 +31,9 @@ public class ProfileGUI extends CustomGui {
             player1.performCommand("friendrequest");
             player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1f, 1f);
         });
-        setItem(16, new CustomItemStack(Material.DOUBLE_PLANT, 1, (byte) 4).setName("§a§lStatistiques").setLore("\n§cBientôt"));
+        setItem(16, new CustomItemStack(Material.DOUBLE_PLANT, 1, (byte) 4).setName("§a§lStatistiques"), player1 -> {
+            player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1f, 1f);
+            player1.sendMessage("§e§lEndoSkull §8» §ahttps://endoskull.fr/endostats/" + player1.getName());
+        });
     }
 }
