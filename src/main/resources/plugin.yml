@@ -1,0 +1,10 @@
+name: EndoSkullLobby
+version: 1.0
+author: BebeDlaStreat
+main: fr.bebedlastreat.endoskullnpc.Main
+commands:
+  fly:
+    permission: deluxehub.command.fly
+  profile:
+    aliases: [profil]
+  spawn:
