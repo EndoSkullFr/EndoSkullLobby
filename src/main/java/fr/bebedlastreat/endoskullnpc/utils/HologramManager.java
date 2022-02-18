@@ -11,12 +11,12 @@ public class HologramManager {
     private static Hologram lobby;
 
     public static void initHolograms() {
-        bedwars = new Hologram(new Location(Bukkit.getWorld("world"), -238.5, 64.58, -261.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("BedwarsSolo"), "§a§lBEDWARS GOULAG");
+        bedwars = new Hologram(new Location(Bukkit.getWorld("world"), -238.5, 64.585, -261.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("BedwarsSolo"), "§a§lBEDWARS GOULAG");
         bedwars.spawn();
-        pvpKit = new Hologram(new Location(Bukkit.getWorld("world"), -246.5, 64.58, -253.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("PvpKit"), "§7✪ §6§lPvpKit §7✪");
+        pvpKit = new Hologram(new Location(Bukkit.getWorld("world"), -246.5, 64.585, -253.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("PvpKit"), "§7✪ §6§lPvpKit §7✪");
         pvpKit.spawn();
 
-        lobby = new Hologram(new Location(Bukkit.getWorld("world"), -268.5, 63.8, -281.5), "§d§lLOBBY");
+        lobby = new Hologram(new Location(Bukkit.getWorld("world"), -268.5, 63.6, -281.5), "§d§lLOBBY");
         lobby.spawn();
         spawnBoxHolograms();
     }
