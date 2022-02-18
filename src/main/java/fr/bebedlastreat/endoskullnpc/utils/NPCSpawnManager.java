@@ -22,5 +22,8 @@ public class NPCSpawnManager {
         (new NPCServer(
                 UUID.fromString("d2b7b4e0-d3ed-4230-ac83-1aa32dc97676"), new Location(world, -246.5, 63, -253.5, 135, 0), "PvpKit", Material.WOOD_SWORD, true, true))
                 .build();
+        (new NPCServer(
+                UUID.fromString("6742ffb0-fdf8-4038-a741-477ad6f53071"), new Location(world, -268.5, 62.0, -281.5), "Lobby", null, true, true))
+                .build();
     }
 }

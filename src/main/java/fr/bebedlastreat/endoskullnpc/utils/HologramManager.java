@@ -8,11 +8,15 @@ import org.bukkit.Location;
 public class HologramManager {
     private static Hologram bedwars;
     private static Hologram pvpKit;
+    private static Hologram lobby;
 
     public static void initHolograms() {
-        bedwars = new Hologram(new Location(Bukkit.getWorld("world"), -238.5, 64.825, -261.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("BedwarsSolo"), "§a§lBEDWARS GOULAG");
+        bedwars = new Hologram(new Location(Bukkit.getWorld("world"), -238.5, 64.525, -261.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("BedwarsSolo"), "§a§lBEDWARS GOULAG");
         bedwars.spawn();
-        pvpKit = new Hologram(new Location(Bukkit.getWorld("world"), -246.5, 64.825, -253.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("PvpKit"), "§7✪ §6§lPvpKit §7✪");
+        pvpKit = new Hologram(new Location(Bukkit.getWorld("world"), -246.5, 64.525, -253.5), "§eConnecté(s): §6" + ServiceInfoSnapshotUtil.getTaskOnlineCount("PvpKit"), "§7✪ §6§lPvpKit §7✪");
+        pvpKit.spawn();
+
+        pvpKit = new Hologram(new Location(Bukkit.getWorld("world"), -268.5, 64.525, -281.5), "§d§lLOBBY");
         pvpKit.spawn();
         spawnBoxHolograms();
     }
