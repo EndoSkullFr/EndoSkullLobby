@@ -33,7 +33,7 @@ public class ProfileGUI extends CustomGui {
         });
         setItem(16, new CustomItemStack(Material.DOUBLE_PLANT, 1, (byte) 4).setName("§a§lStatistiques"), player1 -> {
             player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1f, 1f);
-            player1.sendMessage("§e§lEndoSkull §8» §ahttps://endoskull.fr/endostats/" + player1.getName());
+            player1.sendMessage("§a\n§e§lEndoSkull §8» §ahttps://endoskull.fr/endostats/" + player1.getName() + "\n§a");
         });
     }
 }
