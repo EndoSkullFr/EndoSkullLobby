@@ -25,7 +25,7 @@ public class JoinListener implements Listener {
         if (player.hasPermission("deluxehub.join.message")) {
             LuckPerms luckPerms = LuckPermsProvider.get();
             User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-            e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix() + " " + player.getName() + " §7vient de rejoindre le lobby"));
+            e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix() + player.getName() + " §7vient de rejoindre le lobby"));
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
                 if (player == null) return;
                 player.setAllowFlight(true);
