@@ -8,3 +8,5 @@ commands:
   profile:
     aliases: [profil]
   spawn:
+  property:
+    permission: endoskull.admin.property

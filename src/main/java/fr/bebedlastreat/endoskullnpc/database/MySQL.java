@@ -1,6 +1,6 @@
 package fr.bebedlastreat.endoskullnpc.database;
 
-import fr.endoskull.api.commons.AccountProvider;
+import fr.endoskull.api.commons.account.AccountProvider;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;

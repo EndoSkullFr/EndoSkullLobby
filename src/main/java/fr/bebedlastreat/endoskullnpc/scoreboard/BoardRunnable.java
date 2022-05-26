@@ -2,8 +2,8 @@ package fr.bebedlastreat.endoskullnpc.scoreboard;
 
 
 import fr.bebedlastreat.endoskullnpc.Main;
-import fr.endoskull.api.commons.Account;
-import fr.endoskull.api.commons.AccountProvider;
+import fr.endoskull.api.commons.account.Account;
+import fr.endoskull.api.commons.account.AccountProvider;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -28,6 +28,9 @@ public class BoardRunnable implements Runnable {
         for (FastBoard board : main.getBoards()) {
             try {
                 Player player = board.getPlayer();
+                if (player == null) {
+                    continue;
+                }
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
                 LuckPerms luckPerms = LuckPermsProvider.get();
                 User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
@@ -35,11 +38,10 @@ public class BoardRunnable implements Runnable {
                 List<String> lines = Arrays.asList(
                         "§7" + sdf.format(new Date(System.currentTimeMillis())) + " §8" + Bukkit.getServerName(),
                         "§1",
-                        "§fGrade: §a" + luckPerms.getGroupManager().getGroup(user.getPrimaryGroup()).getFriendlyName(),
-                        "§2",
-                        "§fMoney: §a" + account.getStringSolde(),
-                        "§3",
-                        "§fBoost: §a+" + (int) (account.getBoost().getRealBooster() * 100 - 100) + "%",
+                        "§a§lProfil",
+                        "§7 ╔§fGrade: §a" + luckPerms.getGroupManager().getGroup(user.getPrimaryGroup()).getFriendlyName(),
+                        "§7 ╠§fMoney: §a" + account.getStringSolde(),
+                        "§7 ╚§fBoost: §a+" + (int) (account.getBoost().getRealBooster() * 100 - 100) + "%",
                         "§4",
                         "§emc.endoskull.fr");
                 int i = 0;

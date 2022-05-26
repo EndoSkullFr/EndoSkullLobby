@@ -1,8 +1,7 @@
 package fr.bebedlastreat.endoskullnpc.utils;
 
-import fr.bebedlastreat.endoskullnpc.Main;
-import fr.endoskull.api.commons.Account;
-import fr.endoskull.api.commons.AccountProvider;
+import fr.endoskull.api.commons.account.Account;
+import fr.endoskull.api.commons.account.AccountProvider;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
 import fr.endoskull.api.spigot.utils.Title;
 import org.bukkit.*;
@@ -31,13 +30,16 @@ public class PlayerManager {
         player.getInventory().clear();
         player.getInventory().setArmorContents(new ItemStack[player.getInventory().getArmorContents().length]);
         teleportToSpawn(player);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        for (PotionEffect activePotionEffect : player.getActivePotionEffects()) {
+            player.removePotionEffect(activePotionEffect.getType());
+        }
+        //player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.playSound(player.getLocation(), Sound.NOTE_PLING, 1f, 1f);
         Title.sendTitle(player, 20, 40, 20, "§cEndoSkull Network", "§eVous êtes connecté sur le Lobby");
         player.sendMessage(
                 "§8§m+---------------***---------------+\n" +
                 "§r \n" +
-                "§r    §7Bienvenue, §b" + player.getName() + "§r §7sur le serveur\n" +
+                "§r    §7Bienvenue §b" + player.getName() + "§r §7sur le serveur\n" +
                 "§r \n" +
                 "§r  §c§lSITE WEB §fwww.endoskull.fr\n" +
                 "§r  §6§lBOUTIQUE §fboutique.endoskull.fr\n" +
@@ -52,11 +54,11 @@ public class PlayerManager {
     }
 
     public static void teleportToSpawn(Player player) {
-        player.teleport(new Location(Bukkit.getWorld("world"), -271.5, 62.1, -278.5, -45, 0));
+        player.teleport(new Location(Bukkit.getWorld("Lobby"), -271.5, 62.1, -278.5, -45, 0));
     }
 
     public static void spawnFirework() {
-        Firework firework = Bukkit.getWorld("world").spawn(new Location(Bukkit.getWorld("world"), -271.5, 62, -278.5), Firework.class);
+        Firework firework = Bukkit.getWorld("Lobby").spawn(new Location(Bukkit.getWorld("Lobby"), -271.5, 62, -278.5), Firework.class);
         FireworkMeta fMeta = firework.getFireworkMeta();
         fMeta.setPower(1);
         fMeta.addEffect(FireworkEffect.builder().withColor(Color.AQUA, Color.RED, Color.TEAL, Color.WHITE).flicker(true).trail(true).with(FireworkEffect.Type.BALL_LARGE).build());

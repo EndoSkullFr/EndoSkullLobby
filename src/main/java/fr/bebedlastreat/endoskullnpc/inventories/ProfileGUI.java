@@ -2,6 +2,7 @@ package fr.bebedlastreat.endoskullnpc.inventories;
 
 import fr.endoskull.api.spigot.utils.CustomGui;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -24,12 +25,10 @@ public class ProfileGUI extends CustomGui {
             new SettingsGUI(player1).open(player1);
         });
         setItem(14, new CustomItemStack(Material.RAW_FISH, 1, (byte) 2).setName("§a§lAmis"), player1 -> {
-            player1.performCommand("friendsgui");
-            player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1f, 1f);
+            new FriendsGUI(player1, 0).open(player1);
         });
         setItem(15, new CustomItemStack(Material.ITEM_FRAME).setName("§e§lDemandes d'amis"), player1 -> {
-            player1.performCommand("friendrequest");
-            player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1f, 1f);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "forward " + player.getName() + " friend requests ");
         });
         setItem(16, new CustomItemStack(Material.DOUBLE_PLANT, 1, (byte) 4).setName("§a§lStatistiques"), player1 -> {
             player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1f, 1f);

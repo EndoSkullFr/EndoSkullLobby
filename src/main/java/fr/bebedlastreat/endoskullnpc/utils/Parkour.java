@@ -63,15 +63,15 @@ public class Parkour {
         hologram = new Hologram(leaderboard, "§e§lEndoSkull §8§l» §f§lParkour §a§l" + name, "§c");
         hologram.spawn();
 
-        Hologram holoStart = new Hologram(start.clone().add(0.5, 0.5, 0.5), "§a" + name, "§aDEBUT DU PARKOUR");
+        Hologram holoStart = new Hologram(start.clone().add(0.5, 0.5 + 1.975, 0.5), "§a" + name, "§aDEBUT DU PARKOUR");
         holoStart.spawn();
         int i = 1;
         for (Location checkPoint : checkPoints) {
-            Hologram holoCheckpoint = new Hologram(checkPoint.clone().add(0.5, 0.5, 0.5), "§e" + name, "§eCHECKPOINT #" + i);
+            Hologram holoCheckpoint = new Hologram(checkPoint.clone().add(0.5, 0.5 + 1.975, 0.5), "§e" + name, "§eCHECKPOINT #" + i);
             holoCheckpoint.spawn();
             i++;
         }
-        Hologram holoEnd = new Hologram(end.clone().add(0.5, 0.5, 0.5), "§a" + name, "§aFIN DU PARKOUR");
+        Hologram holoEnd = new Hologram(end.clone().add(0.5, 0.5 + 1.975, 0.5), "§a" + name, "§aFIN DU PARKOUR");
         holoEnd.spawn();
     }
 

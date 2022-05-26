@@ -3,6 +3,7 @@ package fr.bebedlastreat.endoskullnpc;
 import com.github.juliarn.npc.NPCPool;
 import fr.bebedlastreat.endoskullnpc.commands.FlyCommand;
 import fr.bebedlastreat.endoskullnpc.commands.ProfileCommand;
+import fr.bebedlastreat.endoskullnpc.commands.PropertyCommand;
 import fr.bebedlastreat.endoskullnpc.commands.SpawnCommand;
 import fr.bebedlastreat.endoskullnpc.database.MySQL;
 import fr.bebedlastreat.endoskullnpc.listeners.*;
@@ -59,19 +60,21 @@ public class Main extends JavaPlugin {
         getCommand("profile").setExecutor(new ProfileCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("profile").setExecutor(new ProfileCommand());
+        getCommand("property").setExecutor(new PropertyCommand());
 
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new BoardRunnable(this), 60, 20);
+        HologramManager.initHolograms();
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new HologramTask(), 60, 20);
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new ParkourTask(this), 60, 2);
 
-        HologramManager.initHolograms();
+        //HologramManager.initHolograms();
 
-        World world = Bukkit.getWorld("world");
+        World world = Bukkit.getWorld("Lobby");
         world.setStorm(false);
         world.setThundering(false);
-        parkours.add(new Parkour("Lobby", new Location(world, -293, 63, -279), new Location(world, -288.5, 62, -278.5, 90, 0),
+        /**parkours.add(new Parkour("Lobby", new Location(world, -293, 63, -279), new Location(world, -288.5, 62, -278.5, 90, 0),
                 Arrays.asList(new Location(world, -351, 75, -283, 90, 0), new Location(world, -354, 84, -309, -135, 0)),
-                new Location(world, -296, 95, -360), new Location(world, -293.5, 65, -272.5)));
+                new Location(world, -296, 95, -360), new Location(world, -293.5, 65, -272.5)));*/
         super.onEnable();
     }
 

@@ -106,18 +106,6 @@
             <version>3.4.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>de.simonsator</groupId>
-            <artifactId>Party-and-Friends-MySQL-Edition-Spigot-API</artifactId>
-            <version>1.5.1</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>be.maximvdw</groupId>
-                    <artifactId>MVdWPlaceholderAPI</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <!--<dependency>
             <groupId>org.inventivetalent</groupId>
             <artifactId>hologramapi</artifactId>

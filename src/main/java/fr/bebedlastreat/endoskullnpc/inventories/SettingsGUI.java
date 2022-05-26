@@ -1,32 +1,31 @@
 package fr.bebedlastreat.endoskullnpc.inventories;
 
-import de.simonsator.partyandfriends.spigot.api.pafplayers.PAFPlayer;
-import de.simonsator.partyandfriends.spigot.api.pafplayers.PAFPlayerManager;
 import fr.bebedlastreat.endoskullnpc.Main;
-import fr.bebedlastreat.endoskullnpc.utils.FriendSettings;
 import fr.bebedlastreat.endoskullnpc.utils.PlayerManager;
-import fr.endoskull.api.commons.Account;
-import fr.endoskull.api.commons.AccountProvider;
+import fr.endoskull.api.commons.account.Account;
+import fr.endoskull.api.commons.account.AccountProvider;
+import fr.endoskull.api.commons.paf.FriendSettingsSpigot;
+import fr.endoskull.api.commons.paf.FriendUtils;
 import fr.endoskull.api.spigot.utils.CustomGui;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Set;
 
 public class SettingsGUI extends CustomGui {
-    public SettingsGUI(Player player) {
-        super(3, "§c§lEndoSkull §8» §e§lParamètres");
-        player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1f, 1f);
+    public SettingsGUI(Player p) {
+        super(4, "§c§lEndoSkull §8» §e§lParamètres");
+        p.playSound(p.getLocation(), Sound.NOTE_STICKS, 1f, 1f);
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-            Account account = AccountProvider.getAccount(player.getUniqueId());
+            Account account = AccountProvider.getAccount(p.getUniqueId());
+            String nexColor = getNextColor(account);
 
-            setItem(10, new CustomItemStack(Material.ENDER_PEARL).setName("§eCouleur du Pearl Rider")
-                    .setLore("\n§7Couleur actuelle: §f" + account.getProperty("pearl_rider_color", "Green")), player1 -> {
+            setItem(9, new CustomItemStack(Material.ENDER_PEARL).setName("§eCouleur du pearl rider"));
+            setItem(18, new CustomItemStack(PlayerManager.getPearl(p)).setName("§7Cliquez pour passer au " + ChatColor.valueOf(nexColor.toUpperCase()) + nexColor), player -> {
                 String color = account.getProperty("pearl_rider_color", "Green");
                 if (color.equalsIgnoreCase("Green")) {
                     color = "Red";
@@ -38,25 +37,36 @@ public class SettingsGUI extends CustomGui {
                     color = "Green";
                 }
                 account.setProperty("pearl_rider_color", color);
-                new SettingsGUI(player1).open(player1);
-                player1.getInventory().setItem(8, PlayerManager.getPearl(player1));
+                new SettingsGUI(player).open(player);
+                player.getInventory().setItem(8, PlayerManager.getPearl(player));
             });
 
             setItem(26, CustomItemStack.getBackGuiItem(), player1 -> {
                 new ProfileGUI(player1).open(player1);
             });
-            PAFPlayer pafPlayer = PAFPlayerManager.getInstance().getPlayer(player.getUniqueId());
-            int i = 11;
-            for (FriendSettings value : FriendSettings.values()) {
-                int state = pafPlayer.getSettingsWorth(value.getSettingId());
-                setItem(i, new CustomItemStack(value.getItem()).setName("§e" + value.getName())
-                        .setLore("\n§7État: " + (state == 0 ? "§a" : "§c") +
-                                (state == 0 ? value.getSetting0() : value.getSetting1())), player1 -> {
-                    pafPlayer.setSetting(value.getSettingId(), state == 0 ? 1 : 0);
-                    new SettingsGUI(player1).open(player1);
+            for (FriendSettingsSpigot value : FriendSettingsSpigot.values()) {
+                boolean b = FriendUtils.getSetting(p.getUniqueId(), value).equalsIgnoreCase("1");
+                setItem(value.getSlot() + 1, new CustomItemStack(value.getItem()).setName("§e" + value.getName()));
+                setItem(value.getSlot() + 10, new CustomItemStack(Material.INK_SACK).setData((byte) (b ? 10 : 1)).setName("§7Cliquez pour " + (b ? "§cDésativer" : "§aActiver")), player -> {
+                    FriendUtils.setSetting(player.getUniqueId(), value, (b ? "0" : "1"));
+                    player.sendMessage("§a§lAMIS §8» " + (b ? value.getDisable() : value.getEnable()));
+                    new SettingsGUI(player).open(player);
                 });
-                i++;
             }
         });
+    }
+
+    private static String getNextColor(Account account) {
+        String color = account.getProperty("pearl_rider_color", "Green");
+        if (color.equalsIgnoreCase("Green")) {
+            color = "Red";
+        }
+        else if (color.equalsIgnoreCase("Red")) {
+            color = "Blue";
+        }
+        else if (color.equalsIgnoreCase("Blue")) {
+            color = "Green";
+        }
+        return color;
     }
 }

@@ -28,15 +28,21 @@ public class NPCServer {
 
     private boolean imitatePlayer;
 
+    private String value;
+
+    private String signature;
+
     private NPC npc;
 
-    public NPCServer(UUID uuid, Location location, String target, Material itemInHand, boolean lookAtPlayer, boolean imitatePlayer) {
+    public NPCServer(UUID uuid, Location location, String target, Material itemInHand, boolean lookAtPlayer, boolean imitatePlayer, String value, String signature) {
         this.uuid = uuid;
         this.location = location;
         this.target = target;
         this.itemInHand = itemInHand;
         this.lookAtPlayer = lookAtPlayer;
         this.imitatePlayer = imitatePlayer;
+        this.value = value;
+        this.signature = signature;
     }
 
     public UUID getUUID() {
@@ -92,7 +98,7 @@ public class NPCServer {
     }
 
     public void build() {
-        NPC npc = NPC.builder().profile(createProfile(this.uuid)).location(getLocation()).lookAtPlayer(isLookAtPlayer()).imitatePlayer(isImitatePlayer()).spawnCustomizer((spawnedNPC, player) -> {
+        NPC npc = NPC.builder().profile(createProfile(this.uuid, this.value, this.signature)).location(getLocation()).lookAtPlayer(isLookAtPlayer()).imitatePlayer(isImitatePlayer()).spawnCustomizer((spawnedNPC, player) -> {
             spawnedNPC.rotation().queueRotate(getLocation().getYaw(), getLocation().getPitch()).send(new Player[] { player });
             spawnedNPC.metadata().queue(MetadataModifier.EntityMetadata.SKIN_LAYERS, Boolean.valueOf(true)).queue(MetadataModifier.EntityMetadata.SNEAKING, Boolean.valueOf(false)).send(new Player[] { player });
             if (this.itemInHand != null)
@@ -101,11 +107,12 @@ public class NPCServer {
         NPCSpawnManager.getNPC().put(Integer.valueOf(npc.getEntityId()), this);
     }
 
-    public Profile createProfile(UUID uuid) {
+    public Profile createProfile(UUID uuid, String value, String signature) {
         Profile profile = new Profile(uuid);
         profile.complete();
         profile.setName("");
         profile.setUniqueId(new UUID((new Random()).nextLong(), 0L));
+        profile.setProperty(new Profile.Property("textures", value, signature));
         return profile;
     }
 }

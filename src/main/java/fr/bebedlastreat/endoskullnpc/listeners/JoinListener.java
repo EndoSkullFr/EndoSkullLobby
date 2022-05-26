@@ -28,8 +28,8 @@ public class JoinListener implements Listener {
             e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix() + player.getName() + " §7vient de rejoindre le lobby"));
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
                 if (player == null) return;
-                player.setAllowFlight(true);
-                player.setFlying(true);
+                //player.setAllowFlight(true);
+                //player.setFlying(true);
             }, 10);
         } else {
             e.setJoinMessage(null);

@@ -118,18 +118,6 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>de.simonsator</groupId>
-      <artifactId>Party-and-Friends-MySQL-Edition-Spigot-API</artifactId>
-      <version>1.5.1</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>MVdWPlaceholderAPI</artifactId>
-          <groupId>be.maximvdw</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot</artifactId>
       <version>1.8.8-R0.1-SNAPSHOT</version>
