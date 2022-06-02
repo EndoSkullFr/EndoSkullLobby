@@ -11,6 +11,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.geysermc.cumulus.SimpleForm;
+import org.geysermc.cumulus.util.FormImage;
+import org.geysermc.floodgate.api.FloodgateApi;
+import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -34,6 +38,16 @@ public class ClickListener implements Listener {
             e.setCancelled(true);
         }
         if (getName(current).equalsIgnoreCase(getName(PlayerManager.getMenu()))) {
+            System.out.println(FloodgateApi.getInstance().isFloodgatePlayer(player.getUniqueId()));
+            if (FloodgateApi.getInstance().isFloodgatePlayer(player.getUniqueId())) {
+                FloodgatePlayer floodgatePlayer = FloodgateApi.getInstance().getPlayer(player.getUniqueId());
+                SimpleForm simpleForm = SimpleForm.builder().title("§c§lEndoSkull §8» §a§lMenu Principal")
+                        .button("PvpKit", FormImage.Type.URL, "https://images.emojiterra.com/twitter/512px/2694.png")
+                        .button("Bedwars Goulag", FormImage.Type.URL, "https://images.emojiterra.com/google/android-nougat/512px/1f6cf.png")
+                        .build();
+                floodgatePlayer.sendForm(simpleForm);
+                return;
+            }
             new GameMenuGUI(player).open(player);
             e.setCancelled(true);
         }
