@@ -78,7 +78,7 @@ public class Parkour {
     public void updateHolograms() {
         List<UUID> leaderboard = ParkourSQL.getLeaderboard(name);
         int i = 0;
-        String[] lines = new String[12];
+        String[] lines = new String[10];
         lines[0] = "§e§lEndoSkull §8§l» §f§lParkour §a§l" + name;
         lines[1] = "§c";
         for (UUID uuid : leaderboard) {
@@ -87,8 +87,8 @@ public class Parkour {
             lines[i+2] = "§f#" + (i+1) + " §7■ §a" + name + " §7■ §e" + TimeUtils.getTime(ParkourSQL.getTime(uuid, this.name));
             i++;
         }
-        for (int j = 0; j < lines.length; j++) {
-            if (lines[j] == null) lines[j] = "§f#" + (j+1) + " §7■ §a" + "..." + " §7■ §e" + TimeUtils.getTime(0);
+        for (int j = 2; j < lines.length; j++) {
+            if (lines[j-2] == null) lines[j-2] = "§f#" + (j-1) + " §7■ §a" + "..." + " §7■ §e" + TimeUtils.getTime(0);
         }
         Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
             hologram.setLines(lines);
