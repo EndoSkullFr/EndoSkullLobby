@@ -78,7 +78,7 @@ public class Parkour {
     public void updateHolograms() {
         List<UUID> leaderboard = ParkourSQL.getLeaderboard(name);
         int i = 0;
-        String[] lines = new String[10];
+        String[] lines = new String[12];
         lines[0] = "§e§lEndoSkull §8§l» §f§lParkour §a§l" + name;
         lines[1] = "§c";
         for (UUID uuid : leaderboard) {
