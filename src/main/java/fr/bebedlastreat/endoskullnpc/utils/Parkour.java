@@ -88,7 +88,7 @@ public class Parkour {
             i++;
         }
         for (int j = 0; j < lines.length; j++) {
-            if (lines[j] == null) lines[j] = "";
+            if (lines[j] == null) lines[j] = "§f#" + (j+1);
         }
         Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
             hologram.setLines(lines);
