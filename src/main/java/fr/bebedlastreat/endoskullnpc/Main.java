@@ -74,7 +74,7 @@ public class Main extends JavaPlugin {
         world.setThundering(false);
         parkours.add(new Parkour("Lobby", new Location(world, -293, 63, -279), new Location(world, -288.5, 62, -278.5, 90, 0),
                 Arrays.asList(new Location(world, -345, 74, -281, 90, 0), new Location(world, -364, 79, -240, 0, 0), new Location(world, -348, 76, -189, -90, 0)),
-                new Location(world, -296, 95, -360), new Location(world, -293.5, 65, -272.5)));
+                new Location(world, -308, 95, -143), new Location(world, -293.5, 65, -272.5)));
         super.onEnable();
     }
 
