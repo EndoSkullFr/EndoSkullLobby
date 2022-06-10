@@ -31,18 +31,17 @@ public class BoxVoteGUI extends CustomGui {
         for (int j = lines * 9 - 18; j < lines * 9 - 9; j++) {
             setItem(j, new CustomItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 14).setName("§r"));
         }
-        //boolean s = account.getVoteKey() > 1;
-        boolean s = false;
-        setItem(lines * 9 - 5, new CustomItemStack(Material.ANVIL).setName("§d§lOUVRIR").setLore("\n§7Vous avez §d" + /*account.getVoteKey() +*/ " §7Clé" + (s ? "s" : "" ) +" Vote" + (s ? "s" : "" )), player -> {
+        boolean s = account.getStatistic("key/vote") > 1;
+        setItem(lines * 9 - 5, new CustomItemStack(Material.ANVIL).setName("§d§lOUVRIR").setLore("\n§7Vous avez §d" + account.getStatistic("key/vote") + " §7Clé" + (s ? "s" : "" ) +" Vote" + (s ? "s" : "" )), player -> {
             player.closeInventory();
             Account account1 = new AccountProvider(player.getUniqueId()).getAccount();
-            if (/*account1.getVoteKey() < 1*/true) {
+            if (account.getStatistic("key/vote") < 1) {
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.VILLAGER_NO, 50, 50);
                 player.sendMessage("§cVous devez posséder une §lClé Vote §cpour effectuer cette action");
                 return;
             } else {
-                //account1.setVoteKey(account1.getVoteKey() - 1);
+                account.incrementStatistic("key/vote", -1);
                 new OpeningInventory(p).open(p);
             }
         });
