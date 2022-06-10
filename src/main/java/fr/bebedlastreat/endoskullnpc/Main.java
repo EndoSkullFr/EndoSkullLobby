@@ -43,7 +43,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        Math.cos()
         initConnection();
         npcPool = NPCPool.builder(this).spawnDistance(60).actionDistance(30).tabListRemoveTicks(20L).build();
         new NPCSpawnManager();
