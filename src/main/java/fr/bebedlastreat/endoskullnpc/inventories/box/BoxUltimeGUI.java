@@ -57,12 +57,13 @@ public class BoxUltimeGUI extends CustomGui {
         Location loc = new Location(player.getWorld(), -266.5, 65.5, -262.5);
         int i = 0;
         for(double t = 0; t < Math.PI * 2; t += Math.PI * 2 / (double) Ultime.values().length) {
+            if (Ultime.values().length <= i) break;
             double cos = Math.cos(t);
             double sin = Math.sin(t);
-            ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, 0, sin), ArmorStand.class);
+            ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, sin, 0), ArmorStand.class);
             as.setVisible(false);
             as.setMarker(true);
-            as.setGravity(true);
+            as.setGravity(false);
             as.setHelmet(Ultime.values()[i].getItem());
             i++;
         }
