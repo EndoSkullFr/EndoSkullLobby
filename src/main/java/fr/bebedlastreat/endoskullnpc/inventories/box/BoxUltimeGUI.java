@@ -60,7 +60,7 @@ public class BoxUltimeGUI extends CustomGui {
             if (Ultime.values().length <= i) break;
             double cos = Math.cos(t);
             double sin = Math.sin(t);
-            ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, sin, 0), ArmorStand.class);
+            ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, sin + (Ultime.values()[i].isSmall() ? 0.5 : 0), 0), ArmorStand.class);
             as.setVisible(false);
             as.setMarker(true);
             as.setGravity(false);
