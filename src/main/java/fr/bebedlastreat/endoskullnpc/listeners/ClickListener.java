@@ -2,6 +2,7 @@ package fr.bebedlastreat.endoskullnpc.listeners;
 
 import fr.bebedlastreat.endoskullnpc.Main;
 import fr.bebedlastreat.endoskullnpc.inventories.GameMenuGUI;
+import fr.bebedlastreat.endoskullnpc.inventories.box.BoxUltimeGUI;
 import fr.bebedlastreat.endoskullnpc.inventories.box.BoxVoteGUI;
 import fr.bebedlastreat.endoskullnpc.utils.PlayerManager;
 import org.bukkit.Location;
@@ -92,6 +93,9 @@ public class ClickListener implements Listener {
                 return;
             }
             new BoxVoteGUI(player).open(player);
+        }
+        if (loc.getX() == -267 && loc.getY() == 63 && block.getZ() == -263) {
+            new BoxUltimeGUI(player).open(player);
         }
     }
 

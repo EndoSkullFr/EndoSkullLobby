@@ -19,7 +19,7 @@ import java.util.List;
 public class BoxVoteGUI extends CustomGui {
 
     public BoxVoteGUI(Player p) {
-        super((Vote.values().length-1)/9 + 3, "§c§lEndoSkull §8» §e§lBox Vote");
+        super((Vote.values().length-1)/9 + 3, "Box Vote");
         int lines = (Vote.values().length-1)/9 + 3;
         p.playSound(p.getLocation(), Sound.CAT_MEOW, 50, 50);
         Account account = new AccountProvider(p.getUniqueId()).getAccount();
@@ -35,13 +35,13 @@ public class BoxVoteGUI extends CustomGui {
         setItem(lines * 9 - 5, new CustomItemStack(Material.ANVIL).setName("§d§lOUVRIR").setLore("\n§7Vous avez §d" + account.getStatistic("key/vote") + " §7Clé" + (s ? "s" : "" ) +" Vote" + (s ? "s" : "" )), player -> {
             player.closeInventory();
             Account account1 = new AccountProvider(player.getUniqueId()).getAccount();
-            if (account.getStatistic("key/vote") < 1) {
+            if (account1.getStatistic("key/vote") < 1) {
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.VILLAGER_NO, 50, 50);
                 player.sendMessage("§cVous devez posséder une §lClé Vote §cpour effectuer cette action");
                 return;
             } else {
-                account.incrementStatistic("key/vote", -1);
+                account1.incrementStatistic("key/vote", -1);
                 new OpeningInventory(p).open(p);
             }
         });
