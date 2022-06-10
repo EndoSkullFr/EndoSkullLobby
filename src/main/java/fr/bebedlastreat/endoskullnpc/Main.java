@@ -15,6 +15,7 @@ import fr.bebedlastreat.endoskullnpc.utils.HologramManager;
 import fr.bebedlastreat.endoskullnpc.utils.Parkour;
 import fr.bebedlastreat.endoskullnpc.utils.ParkourProgress;
 import fr.bebedlastreat.endoskullnpc.utils.NPCSpawnManager;
+import fr.endoskull.api.spigot.utils.CustomGui;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
     private List<FastBoard> boards = new ArrayList<>();
     private List<Parkour> parkours = new ArrayList<>();
     private HashMap<Player, ParkourProgress> jumping = new HashMap<>();
+    private HashMap<Player, CustomGui> openingKeys = new HashMap<>();
 
     private BasicDataSource connectionPool;
     private MySQL mysql;
@@ -50,7 +52,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new JoinListener(), this);
         pm.registerEvents(new WeatherListener(), this);
         pm.registerEvents(new ProtectListener(), this);
-        pm.registerEvents(new ClickListener(), this);
+        pm.registerEvents(new ClickListener(this), this);
         pm.registerEvents(new PearlRiderListener(), this);
         pm.registerEvents(new MoveListener(), this);
         pm.registerEvents(new LaunchPadListener(), this);
@@ -117,5 +119,9 @@ public class Main extends JavaPlugin {
 
     public MySQL getMysql() {
         return mysql;
+    }
+
+    public HashMap<Player, CustomGui> getOpeningKeys() {
+        return openingKeys;
     }
 }

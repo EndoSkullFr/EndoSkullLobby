@@ -1,8 +1,13 @@
 package fr.bebedlastreat.endoskullnpc.listeners;
 
+import fr.bebedlastreat.endoskullnpc.Main;
 import fr.bebedlastreat.endoskullnpc.inventories.GameMenuGUI;
+import fr.bebedlastreat.endoskullnpc.inventories.box.BoxVoteGUI;
 import fr.bebedlastreat.endoskullnpc.utils.PlayerManager;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -21,7 +26,13 @@ import java.util.UUID;
 
 public class ClickListener implements Listener {
 
+    private Main main;
+
     private HashMap<UUID, Long> pearlCooldown = new HashMap<>();
+
+    public ClickListener(Main main) {
+        this.main = main;
+    }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
@@ -67,6 +78,20 @@ public class ClickListener implements Listener {
             pearlCooldown.put(player.getUniqueId(), System.currentTimeMillis() + 1000);
             pearl.setPassenger(player);
             player.playSound(player.getLocation(), Sound.FIREWORK_LAUNCH, 50, 50);
+        }
+    }
+    @EventHandler
+    public void onClickBlock(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+        Block block = e.getClickedBlock();
+        if (block == null || block.getType() == Material.AIR) return;
+        Location loc = block.getLocation();
+        if (loc.getX() == -256 && loc.getY() == 63 && block.getZ() == -274) {
+            if (main.getOpeningKeys().containsKey(player)) {
+                main.getOpeningKeys().get(player).open(player);
+                return;
+            }
+            new BoxVoteGUI(player).open(player);
         }
     }
 
