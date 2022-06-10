@@ -9,8 +9,11 @@ import fr.endoskull.api.spigot.utils.Hologram;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftItem;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.*;
 
@@ -60,12 +63,15 @@ public class BoxUltimeGUI extends CustomGui {
             if (Ultime.values().length <= i) break;
             double cos = Math.cos(t);
             double sin = Math.sin(t);
-            ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, sin + (Ultime.values()[i].isSmall() ? 0.5 : 0), 0), ArmorStand.class);
+            /*ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, sin + (Ultime.values()[i].isSmall() ? 0.5 : 0), 0), ArmorStand.class);
             as.setVisible(false);
             as.setMarker(true);
             as.setGravity(false);
             as.setHelmet(Ultime.values()[i].getItem());
-            as.setSmall(Ultime.values()[i].isSmall());
+            as.setSmall(Ultime.values()[i].isSmall());*/
+            Item item = loc.getWorld().dropItem(loc.clone().add(cos, sin, 0), Ultime.values()[i].getItem());
+            item.setPickupDelay(Integer.MAX_VALUE);
+            item.setVelocity(new Vector());
             i++;
         }
         /*Animatronic animatronic = new Animatronic("BoxAnim");
