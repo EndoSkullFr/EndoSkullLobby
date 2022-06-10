@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.util.EulerAngle;
 
 import java.util.*;
 
@@ -64,7 +65,8 @@ public class BoxUltimeGUI extends CustomGui {
             as.setVisible(false);
             as.setMarker(true);
             as.setGravity(false);
-            as.setHelmet(Ultime.values()[i].getItem());
+            as.setRightArmPose(new EulerAngle(Math.toRadians(300), Math.toRadians(20), Math.toRadians(345)));
+            as.setItemInHand(Ultime.values()[i].getItem());
             i++;
         }
         /*Animatronic animatronic = new Animatronic("BoxAnim");
