@@ -13,6 +13,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftItem;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
 import java.util.*;
@@ -57,21 +58,19 @@ public class BoxUltimeGUI extends CustomGui {
 
     private void openBox(Player player) {
         openingBox = true;
-        Location loc = new Location(player.getWorld(), -266.5, 63.5, -262.5);
+        Location loc = new Location(player.getWorld(), -266.5, 64.5, -262.5, -180, 0);
+        loc.add(-0.25, -1.66, 0);
         int i = 0;
         for(double t = 0; t < Math.PI * 2; t += Math.PI * 2 / ((double) Ultime.values().length)) {
             if (Ultime.values().length <= i) break;
             double cos = Math.cos(t);
             double sin = Math.sin(t);
-            /*ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, sin + (Ultime.values()[i].isSmall() ? 0.5 : 0), 0), ArmorStand.class);
+            ArmorStand as = player.getWorld().spawn(loc.clone().add(cos, sin + (Ultime.values()[i].isSmall() ? 0.5 : 0), 0), ArmorStand.class);
             as.setVisible(false);
             as.setMarker(true);
             as.setGravity(false);
-            as.setHelmet(Ultime.values()[i].getItem());
-            as.setSmall(Ultime.values()[i].isSmall());*/
-            Item item = loc.getWorld().dropItem(loc.clone().add(cos, sin, 0), Ultime.values()[i].getItem());
-            item.setPickupDelay(Integer.MAX_VALUE);
-            item.setVelocity(new Vector());
+            as.setItemInHand(Ultime.values()[i].getItem());
+            as.setRightArmPose(new EulerAngle(Math.toRadians(100), Math.toRadians(166), Math.toRadians(167)));
             i++;
         }
         /*Animatronic animatronic = new Animatronic("BoxAnim");
