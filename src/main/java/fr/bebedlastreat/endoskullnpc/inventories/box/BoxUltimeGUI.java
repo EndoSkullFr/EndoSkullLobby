@@ -64,7 +64,7 @@ public class BoxUltimeGUI extends CustomGui {
             as.setVisible(false);
             as.setMarker(true);
             as.setGravity(false);
-            as.setItemInHand(Ultime.values()[i].getItem());
+            as.setHelmet(Ultime.values()[i].getItem());
             i++;
         }
         /*Animatronic animatronic = new Animatronic("BoxAnim");
