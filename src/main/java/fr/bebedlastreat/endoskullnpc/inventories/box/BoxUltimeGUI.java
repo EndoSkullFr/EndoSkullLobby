@@ -54,7 +54,7 @@ public class BoxUltimeGUI extends CustomGui {
 
     private void openBox(Player player) {
         openingBox = true;
-        Location loc = new Location(player.getWorld(), -266.5, 65.5, -262.5);
+        Location loc = new Location(player.getWorld(), -266.5, 63.5, -262.5);
         int i = 0;
         for(double t = 0; t < Math.PI * 2; t += Math.PI * 2 / ((double) Ultime.values().length)) {
             if (Ultime.values().length <= i) break;
