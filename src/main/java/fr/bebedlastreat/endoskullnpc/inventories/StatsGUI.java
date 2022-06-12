@@ -5,6 +5,7 @@ import fr.endoskull.api.commons.account.AccountProvider;
 import fr.endoskull.api.spigot.utils.CustomGui;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Locale;
 public class StatsGUI extends CustomGui {
     public StatsGUI(Player player) {
         super(3, "§c§lEndoSkull §8» §a§lStatistiques");
+        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1f, 1f);
         Account account = AccountProvider.getAccount(player.getUniqueId());
 
         setItem(10, new CustomItemStack(Material.NAME_TAG).setName("§aIdentité").setLore("\n§7Pseudo: §e" + player.getName() + "\n§7UUID: §e" + player.getUniqueId()));
