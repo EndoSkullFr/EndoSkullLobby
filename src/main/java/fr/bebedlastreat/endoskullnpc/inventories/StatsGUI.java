@@ -24,7 +24,7 @@ public class StatsGUI extends CustomGui {
         long firstJoin = account.getFirstJoin();
         long lastLogin = Long.parseLong(account.getProperty("lastLogin", "0"));
         long lastLogout = Long.parseLong(account.getProperty("lastLogout", "0"));
-        setItem(12, new CustomItemStack(Material.WATCH).setName("§aDates").setLore("\n§7Première connection: §e" + sdf.format(new Date(firstJoin)) + "\n§7Dernière connection: §e" + sdf.format(new Date(lastLogin)) + "\n§7Dernière déconnection: §e" + sdf.format(new Date(lastLogout))));
+        setItem(12, new CustomItemStack(Material.WATCH).setName("§aDates").setLore("\n§7Première connexion: §e" + sdf.format(new Date(firstJoin)) + "\n§7Dernière connexion: §e" + sdf.format(new Date(lastLogin)) + "\n§7Dernière déconnexion: §e" + sdf.format(new Date(lastLogout))));
 
         int pvpkitKill = account.getStatistic("pvpkit/kill");
         int pvpkitDeath = account.getStatistic("pvpkit/death");
