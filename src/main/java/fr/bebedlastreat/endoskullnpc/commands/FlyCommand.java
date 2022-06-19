@@ -1,5 +1,7 @@
 package fr.bebedlastreat.endoskullnpc.commands;
 
+import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
+import fr.endoskull.api.spigot.utils.Languages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,11 +18,11 @@ public class FlyCommand implements CommandExecutor {
         if (player.getAllowFlight()) {
             player.setAllowFlight(false);
             player.setFlying(false);
-            player.sendMessage("§c§lEndoSkull §8» §fVous avez désactivé le fly");
+            player.sendMessage(Languages.getLang(player).getMessage(LobbyMessage.FLY_DISABLE));
         } else {
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.sendMessage("§c§lEndoSkull §8» §fVous avez activé le fly");
+            player.sendMessage(Languages.getLang(player).getMessage(LobbyMessage.FLY_ENABLE));
         }
         return false;
     }
