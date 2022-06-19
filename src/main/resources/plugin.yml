@@ -2,6 +2,8 @@ name: EndoSkullLobby
 version: 1.0
 author: BebeDlaStreat
 main: fr.bebedlastreat.endoskullnpc.Main
+depend:
+  - EndoSkullCore
 commands:
   fly:
     permission: deluxehub.command.fly

@@ -15,14 +15,18 @@ import fr.bebedlastreat.endoskullnpc.utils.HologramManager;
 import fr.bebedlastreat.endoskullnpc.utils.Parkour;
 import fr.bebedlastreat.endoskullnpc.utils.ParkourProgress;
 import fr.bebedlastreat.endoskullnpc.utils.NPCSpawnManager;
+import fr.endoskull.api.spigot.utils.Languages;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,6 +79,21 @@ public class Main extends JavaPlugin {
         /**parkours.add(new Parkour("Lobby", new Location(world, -293, 63, -279), new Location(world, -288.5, 62, -278.5, 90, 0),
                 Arrays.asList(new Location(world, -351, 75, -283, 90, 0), new Location(world, -354, 84, -309, -135, 0)),
                 new Location(world, -296, 95, -360), new Location(world, -293.5, 65, -272.5)));*/
+        for (Languages value : Languages.values()) {
+            saveResource("languages/" + value.toString().toLowerCase() + ".yml", false);
+            YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "languages/" + value.toString().toLowerCase() + ".yml"));
+            File langFile = new File(fr.endoskull.api.Main.getInstance().getDataFolder(), "languages/" + value.toString().toLowerCase() + ".yml");
+            YamlConfiguration langConfig = YamlConfiguration.loadConfiguration(langFile);
+            for (String key : config.getKeys(false)) {
+                langConfig.set(key, config.get(key));
+            }
+            try {
+                langConfig.save(langFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
         super.onEnable();
     }
 
