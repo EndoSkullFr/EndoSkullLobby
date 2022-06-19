@@ -15,14 +15,19 @@ import fr.bebedlastreat.endoskullnpc.utils.HologramManager;
 import fr.bebedlastreat.endoskullnpc.utils.Parkour;
 import fr.bebedlastreat.endoskullnpc.utils.ParkourProgress;
 import fr.bebedlastreat.endoskullnpc.utils.NPCSpawnManager;
+import fr.endoskull.api.spigot.utils.CustomGui;
+import fr.endoskull.api.spigot.utils.Languages;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +39,7 @@ public class Main extends JavaPlugin {
     private List<FastBoard> boards = new ArrayList<>();
     private List<Parkour> parkours = new ArrayList<>();
     private HashMap<Player, ParkourProgress> jumping = new HashMap<>();
+    private HashMap<Player, CustomGui> openingKeys = new HashMap<>();
 
     private BasicDataSource connectionPool;
     private MySQL mysql;
@@ -50,7 +56,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new JoinListener(), this);
         pm.registerEvents(new WeatherListener(), this);
         pm.registerEvents(new ProtectListener(), this);
-        pm.registerEvents(new ClickListener(), this);
+        pm.registerEvents(new ClickListener(this), this);
         pm.registerEvents(new PearlRiderListener(), this);
         pm.registerEvents(new MoveListener(), this);
         pm.registerEvents(new LaunchPadListener(), this);
@@ -72,9 +78,26 @@ public class Main extends JavaPlugin {
         World world = Bukkit.getWorld("Lobby");
         world.setStorm(false);
         world.setThundering(false);
-        /**parkours.add(new Parkour("Lobby", new Location(world, -293, 63, -279), new Location(world, -288.5, 62, -278.5, 90, 0),
-                Arrays.asList(new Location(world, -351, 75, -283, 90, 0), new Location(world, -354, 84, -309, -135, 0)),
-                new Location(world, -296, 95, -360), new Location(world, -293.5, 65, -272.5)));*/
+        parkours.add(new Parkour("Lobby", new Location(world, -293, 63, -279), new Location(world, -288.5, 62, -278.5, 90, 0),
+                Arrays.asList(new Location(world, -345, 74, -281, 90, 0), new Location(world, -364, 79, -240, 0, 0), new Location(world, -348, 76, -189, -90, 0)),
+                new Location(world, -308, 84, -143), new Location(world, -293.5, 66, -272.5)));
+
+        for (Languages value : Languages.values()) {
+            saveResource("languages/" + value.toString().toLowerCase() + ".yml", false);
+            YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "languages/" + value.toString().toLowerCase() + ".yml"));
+            File langFile = new File(fr.endoskull.api.Main.getInstance().getDataFolder(), "languages/" + value.toString().toLowerCase() + ".yml");
+            YamlConfiguration langConfig = YamlConfiguration.loadConfiguration(langFile);
+            for (String key : config.getKeys(false)) {
+                langConfig.set(key, config.get(key));
+            }
+            try {
+                langConfig.save(langFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        fr.endoskull.api.Main.getInstance().reloadLangFiles();
+
         super.onEnable();
     }
 
@@ -87,7 +110,7 @@ public class Main extends JavaPlugin {
         connectionPool = new BasicDataSource();
         connectionPool.setDriverClassName("com.mysql.jdbc.Driver");
         connectionPool.setUsername("endoskull"); //w_512203
-        connectionPool.setPassword("9zRQ2Cb03DxdPTmG"); //45geFJ445geFJ445geFJ445geFJ4
+        connectionPool.setPassword("2M3hz44XRkkZkph3ExYqm2use5gJQG"); //45geFJ445geFJ445geFJ445geFJ4
         connectionPool.setUrl("jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "endoskull" + "?autoReconnect=true");
         connectionPool.setInitialSize(1);
         connectionPool.setMaxTotal(10);
@@ -117,5 +140,9 @@ public class Main extends JavaPlugin {
 
     public MySQL getMysql() {
         return mysql;
+    }
+
+    public HashMap<Player, CustomGui> getOpeningKeys() {
+        return openingKeys;
     }
 }

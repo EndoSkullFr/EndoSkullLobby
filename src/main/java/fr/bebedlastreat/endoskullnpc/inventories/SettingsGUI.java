@@ -41,7 +41,7 @@ public class SettingsGUI extends CustomGui {
                 player.getInventory().setItem(8, PlayerManager.getPearl(player));
             });
 
-            setItem(26, CustomItemStack.getBackGuiItem(), player1 -> {
+            setItem(26, new CustomItemStack(Material.ARROW).setName("§eRetour"), player1 -> {
                 new ProfileGUI(player1).open(player1);
             });
             for (FriendSettingsSpigot value : FriendSettingsSpigot.values()) {
