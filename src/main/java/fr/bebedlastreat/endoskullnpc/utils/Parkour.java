@@ -87,6 +87,11 @@ public class Parkour {
             lines[i+2] = "§f#" + (i+1) + " §7■ §a" + name + " §7■ §e" + TimeUtils.getTime(ParkourSQL.getTime(uuid, this.name));
             i++;
         }
+        i = 1;
+        for (int j = 2; j < lines.length; j++) {
+            if (lines[j] == null) lines[j] = "§f#" + (i) + " §7■ §a" + "..." + " §7■ §e" + TimeUtils.getTime(0);
+            i++;
+        }
         Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
             hologram.setLines(lines);
             hologram.update();
