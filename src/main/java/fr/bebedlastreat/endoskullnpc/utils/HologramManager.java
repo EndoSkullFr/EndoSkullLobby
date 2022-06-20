@@ -30,9 +30,9 @@ public class HologramManager {
     }
 
     private static void spawnBoxHolograms() {
-        Hologram ultime = new Hologram(new Location(Bukkit.getWorld("Lobby"), -255.5, 63.8, -270.5), "§4§m----------", "§4§lBox Ultime", "§4§m----------");
+        /*Hologram ultime = new Hologram(new Location(Bukkit.getWorld("Lobby"), -255.5, 63.8, -270.5), "§4§m----------", "§4§lBox Ultime", "§4§m----------");
         ultime.spawn();
         Hologram vote = new Hologram(new Location(Bukkit.getWorld("Lobby"), -263.5, 63.8, -262.5), "§d§m----------", "§d§lBox Vote", "§d§m----------");
-        vote.spawn();
+        vote.spawn();*/
     }
 }

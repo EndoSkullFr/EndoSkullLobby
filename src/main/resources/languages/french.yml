@@ -93,3 +93,6 @@ lobby:
     §7 ╚§fBoost: §a+{boost}%
     §4
     §emc.endoskull.net
+  language: "§a§lLangue"
+  gui-language: "§c§lEndoSkull §8» §a§lLangue"
+  language-change: "§eEndoSkull §8» §7Vous avez changer votre langue en §a{lang}§7. Pour que ce paramètre soit complètement pris en compte veuillez vous §edécoonecter §7puis vous §ereconnecter§7."
