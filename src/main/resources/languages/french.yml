@@ -85,7 +85,7 @@ lobby:
   cosmetics-item: "§e§lCosmétiques"
   pearl-rider: "§2§lPearl Rider"
   scoreboard: |-
-    §7{date} §8{server}"
+    §7{date} §8{server}
     §1
     §a§lProfil
     §7 ╔§fGrade: §a{rank}
