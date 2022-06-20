@@ -30,10 +30,9 @@ public class LanguageGUI extends CustomGui {
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1);
                 player.sendMessage(value.getMessage(LobbyMessage.LANGUAGE_CHANGE).replace("{lang}", value.getName()));
-                //todo plugin message
                 ByteArrayDataOutput dataOutput = ByteStreams.newDataOutput();
                 dataOutput.writeUTF("UpdateLanguage");
-                player.sendPluginMessage(fr.bebedlastreat.endoskullnpc.Main.getInstance(), Main.MESSAGE_CHANNEL, dataOutput.toByteArray());
+                player.sendPluginMessage(Main.getInstance(), Main.CHANNEL, dataOutput.toByteArray());
             });
         }
 
