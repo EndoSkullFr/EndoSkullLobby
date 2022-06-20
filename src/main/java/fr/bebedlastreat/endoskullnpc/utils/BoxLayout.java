@@ -19,8 +19,13 @@ public class BoxLayout implements LayoutExtension {
         if (layout.getName().equals(LAYOUT_ULTIME)) {
             System.out.println("Layout chargé !");
             layout.registerTextProcessor((player, interaction, text) -> {
-                return text.replaceAll("%key_ultime%", Languages.getLang(player).getMessage(LobbyMessage.KEY_ULTIME))
-                        .replaceAll("%key_vote%", Languages.getLang(player).getMessage(LobbyMessage.KEY_VOTE));
+                return text.replaceAll("%key_ultime%", Languages.getLang(player).getMessage(LobbyMessage.KEY_ULTIME));
+            });
+        }
+        if (layout.getName().equals(LAYOUT_VOTE)) {
+            System.out.println("Layout chargé !");
+            layout.registerTextProcessor((player, interaction, text) -> {
+                return text.replaceAll("%key_vote%", Languages.getLang(player).getMessage(LobbyMessage.KEY_VOTE));
             });
         }
     }
