@@ -39,7 +39,7 @@ public class FriendsGUI extends CustomGui {
         for (UUID uuid : friends) {
             String name = SpigotPlayerInfos.getNameFromUuid(uuid);
             boolean online = FriendUtils.isOnline(uuid);
-            setItem(slots[i], CustomItemStack.getPlayerSkull(name).setName(EndoSkullAPI.getPrefix(uuid) + name + " " + (online ? "§a(" + lang.getMessage(MessageUtils.Paf.ONLINE) +")" : "§c(" + lang.getMessage(MessageUtils.Paf.OFFLINE) + ")")));
+            setItem(slots[i], CustomItemStack.getPlayerSkull(name).setName(EndoSkullAPI.getPrefix(uuid) + name + " " + (online ? "§a" + lang.getMessage(MessageUtils.Paf.ONLINE) : "§c" + lang.getMessage(MessageUtils.Paf.OFFLINE))));
             i++;
             if (i >= slots.length) break;
         }
