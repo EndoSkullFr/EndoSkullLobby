@@ -51,7 +51,7 @@ lobby:
   stats: "§a§lStatistiques"
   gui-stats: "§c§lEndoSkull §8» §a§lStatistiques"
   identity: "§aIdentité"
-  identity-desc: "\n§7Pseudo: §e{player}\n§7UUID: §e{uuid}"
+  identity-desc: "\n§7Pseudo: §e{name}\n§7UUID: §e{uuid}"
   date: "§aDates"
   date-desc: "\n§7Première connexion: §e{firstLogin}\n§7Dernière connexion: §e{lastLogin}\n§7Dernière déconnexion: §e{lastLogout}"
   stat-pvpkit: "\n§7Kill(s): §e{kills}\n§7Mort(s): §e{deaths}"
