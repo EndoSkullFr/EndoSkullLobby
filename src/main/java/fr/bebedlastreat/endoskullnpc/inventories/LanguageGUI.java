@@ -1,5 +1,7 @@
 package fr.bebedlastreat.endoskullnpc.inventories;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.endoskull.api.Main;
 import fr.endoskull.api.commons.account.Account;
@@ -29,6 +31,9 @@ public class LanguageGUI extends CustomGui {
                 player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1);
                 player.sendMessage(value.getMessage(LobbyMessage.LANGUAGE_CHANGE).replace("{lang}", value.getName()));
                 //todo plugin message
+                ByteArrayDataOutput dataOutput = ByteStreams.newDataOutput();
+                dataOutput.writeUTF("UpdateLanguage");
+                player.sendPluginMessage(fr.bebedlastreat.endoskullnpc.Main.getInstance(), Main.MESSAGE_CHANNEL, dataOutput.toByteArray());
             });
         }
 
