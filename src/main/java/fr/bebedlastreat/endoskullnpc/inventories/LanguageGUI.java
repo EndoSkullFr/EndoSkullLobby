@@ -20,7 +20,7 @@ public class LanguageGUI extends CustomGui {
             setItem(glassSlot, CustomItemStack.getPane(3).setName("§r"));
         }
         for (Languages value : Languages.values()) {
-            setItem(value.getSlot(), CustomItemStack.getSkull(value.getSkull()).setName("§a" + value.getName()).setLore(value.getLore()).setGlow(value == lang), player -> {
+            setItem(value.getSlot(), CustomItemStack.getSkull(value.getSkull()).setName((lang == value ? "§a✔ " : "§e") + value.getName()).setLore(value.getLore()), player -> {
                 if (value == lang) return;
                 Account account = AccountProvider.getAccount(player.getUniqueId());
                 account.setLang(value);
@@ -28,6 +28,7 @@ public class LanguageGUI extends CustomGui {
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1);
                 player.sendMessage(value.getMessage(LobbyMessage.LANGUAGE_CHANGE).replace("{lang}", value.getName()));
+                //todo plugin message
             });
         }
 

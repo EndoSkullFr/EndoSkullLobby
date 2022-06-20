@@ -24,7 +24,7 @@ public class ProfileGUI extends CustomGui {
 
         setItem(10, new CustomItemStack(skull).setName("§a" + player.getName()));
 
-        setItem(12, CustomItemStack.getSkull("http://textures.minecraft.net/texture/1af99db283263471b8f6c62c9a937782eecccc2572adcf0dd4f60ebc8001a4a7").setName(lang.getMessage(LobbyMessage.LANGUAGE)), player1 -> {
+        setItem(12, CustomItemStack.getSkull("http://textures.minecraft.net/texture/2e2cc42015e6678f8fd49ccc01fbf787f1ba2c32bcf559a015332fc5db50").setName(lang.getMessage(LobbyMessage.LANGUAGE)), player1 -> {
             new LanguageGUI(player1).open();
         });
         setItem(13, new CustomItemStack(Material.REDSTONE_COMPARATOR).setName(lang.getMessage(LobbyMessage.SETTINGS)), player1 -> {
