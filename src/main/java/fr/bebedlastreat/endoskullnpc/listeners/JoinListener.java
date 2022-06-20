@@ -2,7 +2,9 @@ package fr.bebedlastreat.endoskullnpc.listeners;
 
 import fr.bebedlastreat.endoskullnpc.Main;
 import fr.bebedlastreat.endoskullnpc.scoreboard.FastBoard;
+import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.bebedlastreat.endoskullnpc.utils.PlayerManager;
+import fr.endoskull.api.spigot.utils.Languages;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -25,7 +27,11 @@ public class JoinListener implements Listener {
         if (player.hasPermission("deluxehub.join.message")) {
             LuckPerms luckPerms = LuckPermsProvider.get();
             User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-            e.setJoinMessage(ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix() + player.getName() + " §7vient de rejoindre le lobby"));
+            //e.setJoinMessage(ChatColor.translateAlternateColorCodes('&',  + " §7vient de rejoindre le lobby"));
+            e.setJoinMessage(null);
+            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                onlinePlayer.sendMessage(Languages.getLang(onlinePlayer).getMessage(LobbyMessage.JOIN_MESSAGE).replace("{player}", user.getCachedData().getMetaData().getPrefix() + player.getName()));
+            }
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
                 if (player == null) return;
                 //player.setAllowFlight(true);

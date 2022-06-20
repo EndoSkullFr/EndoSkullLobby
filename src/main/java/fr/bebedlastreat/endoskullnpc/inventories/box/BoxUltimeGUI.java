@@ -6,17 +6,14 @@ import com.gmail.filoghost.holographicdisplays.api.line.ItemLine;
 import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
 import fr.bebedlastreat.endoskullnpc.Main;
 import fr.bebedlastreat.endoskullnpc.box.Ultime;
+import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.endoskull.api.commons.account.Account;
 import fr.endoskull.api.commons.account.AccountProvider;
 import fr.endoskull.api.spigot.utils.CustomGui;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
+import fr.endoskull.api.spigot.utils.Languages;
 import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftItem;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.util.EulerAngle;
-import org.bukkit.util.Vector;
 
 import java.util.*;
 
@@ -24,30 +21,31 @@ public class BoxUltimeGUI extends CustomGui {
     private static boolean openingBox = false;
 
     public BoxUltimeGUI(Player p) {
-        super((Ultime.values().length-1)/9 + 3, "§c§lEndoSkull §8» §c§lBox Ultime");
+        super((Ultime.values().length-1)/9 + 3, Languages.getLang(p).getMessage(LobbyMessage.GUI_BOX_ULTIME), p);
+        Languages lang = Languages.getLang(p);
         int lines = (Ultime.values().length-1)/9 + 3;
         p.playSound(p.getLocation(), Sound.CAT_MEOW, 50, 50);
         Account account = new AccountProvider(p.getUniqueId()).getAccount();
         int i = 0;
         for (Ultime value : Ultime.values()) {
-            setItem(i, new CustomItemStack(value.getItem()).setName(value.getName()).setLore("\n§7Probabilité: " + value.getName().substring(0, 2) + value.getPourcent() + "%"));
+            setItem(i, new CustomItemStack(value.getItem()).setName(lang.getMessage(value.getName())).setLore("\n" + lang.getMessage(LobbyMessage.PROBABILITY) + " " + lang.getMessage(value.getName()).substring(0, 2) + value.getPourcent() + "%"));
             i++;
         }
         for (int j = lines * 9 - 18; j < lines * 9 - 9; j++) {
             setItem(j, new CustomItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 14).setName("§r"));
         }
         boolean s = account.getStatistic("key/ultime") > 1;
-        setItem(lines * 9 - 5, new CustomItemStack(Material.ANVIL).setName("§c§lOUVRIR").setLore("\n§7Vous avez §c" + account.getStatistic("key/ultime") + " §7Clé" + (s ? "s" : "" ) +" Ultime" + (s ? "s" : "" )), player -> {
+        setItem(lines * 9 - 5, new CustomItemStack(Material.ANVIL).setName("§c§l" + lang.getMessage(LobbyMessage.BOX_OPEN)).setLore(lang.getMessage(LobbyMessage.ULTIME_AMOUNT).replace("{amount}", String.valueOf(account.getStatistic("key/ultime"))).replace("{s}", (s ? "s" : "" ))), player -> {
             player.closeInventory();
             Account account1 = new AccountProvider(player.getUniqueId()).getAccount();
             if (account1.getStatistic("key/ultime") < 1) {
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.VILLAGER_NO, 50, 50);
-                player.sendMessage("§cVous devez posséder une §lClé Ultime §cpour effectuer cette action");
+                player.sendMessage(lang.getMessage(LobbyMessage.NEED_ULTIME_KEY));
                 return;
             } else {
                 if (openingBox) {
-                    player.sendMessage("§cUn joueur est déjà en train d'ouvrir une box, merci de patienter la fin de l'ouverture de celle-ci");
+                    player.sendMessage(lang.getMessage(LobbyMessage.ULTIME_ALREADY_OPENING));
                     player.playSound(player.getLocation(), Sound.CAT_HIT, 1f, 1f);
                     return;
                 }
@@ -79,7 +77,7 @@ public class BoxUltimeGUI extends CustomGui {
         }*/
 
         Location loc = new Location(player.getWorld(), -266.5, 66, -262.5, -180, 0);
-        scheduleFirstStep(new ArrayList<>(), 0, player, loc);
+        scheduleFirstStep(new ArrayList<>(), 0, player, loc, Languages.getLang(player));
 
         /*Animatronic animatronic = new Animatronic("BoxAnim");
         List<Ultime> loots = new ArrayList<>();
@@ -97,9 +95,9 @@ public class BoxUltimeGUI extends CustomGui {
         playTick(player, animatronic, loots, ticks, 0);*/
     }
 
-    private void scheduleFirstStep(List<Hologram> holograms, int step, Player player, Location loc) {
+    private void scheduleFirstStep(List<Hologram> holograms, int step, Player player, Location loc, Languages lang) {
         if (Ultime.values().length <= step) {
-            scheduleSecondStep(holograms, player, loc);
+            scheduleSecondStep(holograms, player, loc, lang);
             return;
         }
         double t = Math.PI * 2 / ((double) Ultime.values().length) * step;
@@ -110,11 +108,11 @@ public class BoxUltimeGUI extends CustomGui {
         hologram.appendItemLine(Ultime.values()[step].getItem());
         holograms.add(hologram);
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            scheduleFirstStep(holograms, step + 1, player, loc);
+            scheduleFirstStep(holograms, step + 1, player, loc, lang);
         }, 3);
     }
 
-    private void scheduleSecondStep(List<Hologram> holograms, Player player, Location loc) {
+    private void scheduleSecondStep(List<Hologram> holograms, Player player, Location loc, Languages lang) {
         if (holograms.isEmpty()) {
             List<Ultime> loots = new ArrayList<>();
             for (Ultime value : Ultime.values()) {
@@ -124,30 +122,30 @@ public class BoxUltimeGUI extends CustomGui {
             }
             Collections.shuffle(loots);
             Hologram hologram = HologramsAPI.createHologram(Main.getInstance(), loc.add(0, 0.25, 0));
-            TextLine textLine = hologram.appendTextLine(loots.get(0).getName());
+            TextLine textLine = hologram.appendTextLine(lang.getMessage(loots.get(0).getName()));
             ItemLine itemLine = hologram.appendItemLine(loots.get(0).getItem());
-            scheduleThirdStep(hologram, textLine, itemLine, loots, 0, player, loc);
+            scheduleThirdStep(hologram, textLine, itemLine, loots, 0, player, loc, lang);
             return;
         }
         loc.getWorld().playSound(loc, Sound.NOTE_BASS, 1, 1);
         holograms.get(0).delete();
         holograms.remove(0);
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            scheduleSecondStep(holograms, player, loc);
+            scheduleSecondStep(holograms, player, loc, lang);
         }, 2);
     }
 
-    private void scheduleThirdStep(Hologram hologram, TextLine textLine, ItemLine itemLine, List<Ultime> loots, int step, Player player, Location loc) {
+    private void scheduleThirdStep(Hologram hologram, TextLine textLine, ItemLine itemLine, List<Ultime> loots, int step, Player player, Location loc, Languages lang) {
         double timer = getTimer(1d + ((double) step /10d));
         if (timer <= 1) {
             hologram.teleport(loc);
-            textLine.setText(loots.get(step).getName());
+            textLine.setText(lang.getMessage(loots.get(step).getName()));
             itemLine.setItemStack(loots.get(step).getItem());
             loc.getWorld().playSound(hologram.getLocation(), Sound.FIREWORK_LAUNCH, 1f, 1f);
             loc.getWorld().playEffect(hologram.getLocation(), Effect.LARGE_SMOKE, 500);
 
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                scheduleFourthStep(hologram, textLine, itemLine, loots, step + 1, 0, player, loc);
+                scheduleFourthStep(hologram, textLine, itemLine, loots, step + 1, 0, player, loc, lang);
             }, 2);
             return;
         }
@@ -157,43 +155,43 @@ public class BoxUltimeGUI extends CustomGui {
         double t = Math.PI * 2 / ((double) Ultime.values().length) * step;
         double sin = Math.sin(t)*0.5;
         hologram.teleport(loc.clone().add(0, sin, 0));
-        textLine.setText(loots.get(step).getName());
+        textLine.setText(lang.getMessage(loots.get(step).getName()));
         itemLine.setItemStack(loots.get(step).getItem());
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            scheduleThirdStep(hologram, textLine, itemLine, loots, step + 1, player, loc);
+            scheduleThirdStep(hologram, textLine, itemLine, loots, step + 1, player, loc, lang);
         }, Math.round(timer));
     }
 
 
-    private void scheduleFourthStep(Hologram hologram, TextLine textLine, ItemLine itemLine, List<Ultime> loots, int lootStep, int step, Player player, Location loc) {
+    private void scheduleFourthStep(Hologram hologram, TextLine textLine, ItemLine itemLine, List<Ultime> loots, int lootStep, int step, Player player, Location loc, Languages lang) {
         if (step >= 10) {
             hologram.teleport(loc.clone().add(0, step, 0));
-            textLine.setText(loots.get(step).getName());
+            textLine.setText(lang.getMessage(loots.get(step).getName()));
             itemLine.setItemStack(loots.get(step).getItem());
             loc.getWorld().playSound(hologram.getLocation(), Sound.EXPLODE, 1f, 1f);
             loc.getWorld().playEffect(hologram.getLocation(), Effect.EXPLOSION_LARGE, 500);
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                scheduleFifthStep(hologram, textLine, itemLine, loots, lootStep + 1, 0, player, loc);
+                scheduleFifthStep(hologram, textLine, itemLine, loots, lootStep + 1, 0, player, loc, lang);
             }, 2);
             return;
         }
         hologram.teleport(loc.clone().add(0, step, 0));
-        textLine.setText(loots.get(lootStep).getName());
+        textLine.setText(lang.getMessage(loots.get(lootStep).getName()));
         itemLine.setItemStack(loots.get(lootStep).getItem());
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            scheduleFourthStep(hologram, textLine, itemLine, loots, lootStep + 1, step + 1, player, loc);
+            scheduleFourthStep(hologram, textLine, itemLine, loots, lootStep + 1, step + 1, player, loc, lang);
         }, 2);
     }
 
-    private void scheduleFifthStep(Hologram hologram, TextLine textLine, ItemLine itemLine, List<Ultime> loots, int lootStep, int step, Player player, Location loc) {
+    private void scheduleFifthStep(Hologram hologram, TextLine textLine, ItemLine itemLine, List<Ultime> loots, int lootStep, int step, Player player, Location loc, Languages lang) {
         if (step >= 22) {
-            endOpening(loots, textLine, itemLine, lootStep, loc, player, hologram);
+            endOpening(loots, textLine, itemLine, lootStep, loc, player, hologram, lang);
             return;
         }
         hologram.teleport(loc.clone().add(0, 10, 0).add(0, -((double) step/2d), 0));
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            scheduleFifthStep(hologram, textLine, itemLine, loots, lootStep + 1, step + 1, player, loc);
+            scheduleFifthStep(hologram, textLine, itemLine, loots, lootStep + 1, step + 1, player, loc, lang);
         }, 2);
     }
 
@@ -201,14 +199,17 @@ public class BoxUltimeGUI extends CustomGui {
         return 10/Math.pow(x, 1.05);
     }
 
-    private void endOpening(List<Ultime> loots, TextLine textLine, ItemLine itemLine, int step, Location loc, Player player, Hologram hologram) {
+    private void endOpening(List<Ultime> loots, TextLine textLine, ItemLine itemLine, int step, Location loc, Player player, Hologram hologram, Languages lang) {
         Ultime reward = loots.get(step);
-        textLine.setText(reward.getName());
+        textLine.setText(lang.getMessage(reward.getName()));
         itemLine.setItemStack(reward.getItem());
         loc.getWorld().playSound(hologram.getLocation(), Sound.ENDERDRAGON_GROWL, 1f, 1f);
         loc.getWorld().playEffect(hologram.getLocation(), Effect.NOTE, 500);
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), reward.getCommand().replace("%player%", player.getName()));
-        Bukkit.broadcastMessage("§r\n§cEndoSkull §8» §a" + player.getName() + " §fvient d'obtenir " + reward.getName() + " §fdans sa Clé Ultime\n§r ");
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.sendMessage(Languages.getLang(p).getMessage(LobbyMessage.ULTIME_BROADCAST).replace("{player}", player.getDisplayName()).replace("{reward}", Languages.getLang(p).getMessage(reward.getName())));
+        }
+        Bukkit.getConsoleSender().sendMessage(Languages.getLang(Bukkit.getConsoleSender()).getMessage(LobbyMessage.ULTIME_BROADCAST).replace("{player}", player.getDisplayName()).replace("{reward}", Languages.getLang(Bukkit.getConsoleSender()).getMessage(reward.getName())));
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             openingBox = false;
             hologram.delete();

@@ -2,8 +2,10 @@ package fr.bebedlastreat.endoskullnpc.scoreboard;
 
 
 import fr.bebedlastreat.endoskullnpc.Main;
+import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.endoskull.api.commons.account.Account;
 import fr.endoskull.api.commons.account.AccountProvider;
+import fr.endoskull.api.spigot.utils.Languages;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -35,7 +37,16 @@ public class BoardRunnable implements Runnable {
                 LuckPerms luckPerms = LuckPermsProvider.get();
                 User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
                 Account account = AccountProvider.getAccount(player.getUniqueId());
+
                 List<String> lines = Arrays.asList(
+                        Languages.getLang(player).getMessage(LobbyMessage.SCOREBOARD)
+                                .replace("{date}", sdf.format(new Date(System.currentTimeMillis())))
+                                .replace("{server}", Bukkit.getServerName())
+                                .replace("{rank}", luckPerms.getGroupManager().getGroup(user.getPrimaryGroup()).getFriendlyName())
+                                .replace("{coins}", account.getStringSolde())
+                                .replace("{boost}", String.valueOf((int) (account.getBoost().getRealBooster() * 100 - 100))).split("\n")
+                );
+                /*List<String> lines = Arrays.asList(
                         "§7" + sdf.format(new Date(System.currentTimeMillis())) + " §8" + Bukkit.getServerName(),
                         "§1",
                         "§a§lProfil",
@@ -43,7 +54,7 @@ public class BoardRunnable implements Runnable {
                         "§7 ╠§fMoney: §a" + account.getStringSolde(),
                         "§7 ╚§fBoost: §a+" + (int) (account.getBoost().getRealBooster() * 100 - 100) + "%",
                         "§4",
-                        "§emc.endoskull.fr");
+                        "§emc.endoskull.fr");*/
                 int i = 0;
                 for (String line : lines) {
                     if (line.length() > 30) {
