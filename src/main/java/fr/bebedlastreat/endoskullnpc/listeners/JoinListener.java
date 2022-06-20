@@ -30,7 +30,7 @@ public class JoinListener implements Listener {
             //e.setJoinMessage(ChatColor.translateAlternateColorCodes('&',  + " §7vient de rejoindre le lobby"));
             e.setJoinMessage(null);
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                onlinePlayer.sendMessage(Languages.getLang(onlinePlayer).getMessage(LobbyMessage.JOIN_MESSAGE).replace("{player}", user.getCachedData().getMetaData().getPrefix() + player.getName()));
+                onlinePlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', Languages.getLang(onlinePlayer).getMessage(LobbyMessage.JOIN_MESSAGE).replace("{player}", user.getCachedData().getMetaData().getPrefix() + player.getName())));
             }
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
                 if (player == null) return;
