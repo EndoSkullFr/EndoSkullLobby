@@ -1,0 +1,100 @@
+lobby:
+  red: "Rouge"
+  green: "Vert"
+  blue: "Bleu"
+  click-skip: "§7Cliquez pour passer au "
+  pearl-color: "§eCouleur du pearl rider"
+  booster9: "§eBOOSTER §l+300% §7(1 jour)"
+  booster8: "§eBOOSTER §l+250% §7(1 jour)"
+  booster7: "§eBOOSTER §l+250% §7(3 jours)"
+  booster6: "§eBOOSTER §l+200% §7(3 jours)"
+  booster5: "§eBOOSTER §l+200% §7(7 jours)"
+  booster4: "§eBOOSTER §l+150% §7(7 jours)"
+  booster3: "§eBOOSTER §l+150% §7(14 jours)"
+  booster2: "§eBOOSTER §l+100% §7(14 jours)"
+  booster1: "§eBOOSTER §l+100% §7(30 jours)"
+  booster0: "§eBOOSTER §l+50% §7(30 jours)"
+  double: "§42 Clés Ultimes"
+  vip: "§eGrade VIP §7(1 mois)"
+  hero: "§bGrade Hero §7(1 mois)"
+  ultime: "§4Clé Ultime"
+  boost3: "§eBOOSTER §l+100% §7(1 heure)"
+  boost2: "§eBOOSTER §l+100% §7(30 min)"
+  boost1: "§eBOOSTER §l+50% §7(1 heure)"
+  coins5: "§e1000 Coins"
+  coins4: "§e500 Coins"
+  coins3: "§e150 Coins"
+  coins2: "§e100 Coins"
+  coins1: "§e50 Coins"
+  fly-enable: "§c§lEndoSkull §8» §fVous avez activé le fly"
+  fly-disable: "§c§lEndoSkull §8» §fVous avez désactivé le fly"
+  gui-box-ultime: "§c§lEndoSkull §8» §c§lBox Ultime"
+  gui-box-vote: "Box Vote"
+  probability: "§7Probabilité:"
+  box-open: "OUVRIR"
+  ultime-amount: "\n§7Vous avez §c{amount} §7Clé{s} Ultime{s}"
+  need-ultime-key: "§cVous devez posséder une §lClé Ultime §cpour effectuer cette action"
+  ultime-aldreay-opening: "§cUn joueur est déjà en train d'ouvrir une box, merci de patienter la fin de l'ouverture de celle-ci"
+  ultime-broadcast: "§r\n§cEndoSkull §8» §a{player} §fvient d'obtenir {reward} §fdans sa Clé Ultime\n§r "
+  vote-amount: "\n§7Vous avez §d{amount} §7Clé{s} Vote{s}"
+  need-vote-key: "§cVous devez posséder une §lClé Vote §cpour effectuer cette action"
+  vote-reward: "§cEndoSkull §8» §fTu as gagné {reward} §fdans ta Clé Vote"
+  gui-friends: "§c§lEndoSkull §8» §a§lAmis"
+  no-friend: "§cVous n'avez pas d'amis"
+  gui-main-menu: "§c§lEndoSkull §8» §a§lMenu Principal"
+  pvpkit-desc: "\n§e2 §7à §e20§e joueurs\n\n§7◇ §fDans ce mode jeux choisissez un kit pour aller\n§fcombattre dans l'arène face aux autres joueurs\n\n§7Connectés: §e{online}"
+  bedwars-desc: "\n§e2 §7à §e8§e joueurs\n\n§7◇ §fDans cette version du célèbre mode de jeux,\n§fvous pouvez combattre après votre élimination\n§fpour tenter de réapparaître\n\n§7Connectés: §e{online}"
+  gui-profile: "§c§lEndoSkull §8» §b§lProfil"
+  settings: "§e§lParamètres"
+  friends: "§a§lAmis"
+  friends-requests: "§e§lDemandes d'amis"
+  stats: "§a§lStatistiques"
+  gui-stats: "§c§lEndoSkull §8» §a§lStatistiques"
+  identity: "§aIdentité"
+  identity-desc: "\n§7Pseudo: §e{name}\n§7UUID: §e{uuid}"
+  date: "§aDates"
+  date-desc: "\n§7Première connexion: §e{firstLogin}\n§7Dernière connexion: §e{lastLogin}\n§7Dernière déconnexion: §e{lastLogout}"
+  stat-pvpkit: "\n§7Kill(s): §e{kills}\n§7Mort(s): §e{deaths}"
+  join-message: "{player} §7vient de rejoindre le lobby"
+  parkour-checkpoint-item: "§e§lDernier checkpoint"
+  parkour-reset-item: "§6§lRecommencer"
+  parkour-leave-item: "§c§lQuitter"
+  parkour-restart: "§eEndoSkull §8» §7Vous avez recommencé le parkour §a{parkour}"
+  parkour-finish: "§eEndoSkull §8» §7Vous avez terminé le parkour §a{parkour} §7en §a{time} §7(Record: §a{record}§7)"
+  parkour-finish-best: "§eEndoSkull §8» §7Vous avez battu votre temps sur le parkour §a{parkour} §7en §a{time} §7(Ancien temps: §a{old}§7)"
+  parkour-finish-first: "§eEndoSkull §8» §7Vous avez terminé pour la première fois le parkour §a{parkour} §7en §a{time}"
+  parkour-checkpoint: "§eEndoSkull §8» §7Vous avez atteint le checkpoint §a#{checkpoint} §7en §a{time}"
+  parkour-start: "§eEndoSkull §8» §7Vous avez commencé le parkour §a{parkour}"
+  parkour-fly: "§eEndoSkull §8» §7Parcours annulé, vous avez volé"
+  parkour-teleport: "§eEndoSkull §8» §7Parcours annulé, vous vous êtes téléporté"
+  parkour-mount: "§eEndoSkull §8» §7Vous ne pouvez pas monté sur une monture durant le parcours"
+  lobby-title: "§eVous êtes connecté sur le Lobby"
+  lobby-message: |-
+    §8§m+---------------***---------------+
+    "§r
+    §r    §7Bienvenue §b{player}§r §7sur le serveur
+    §r
+    §r  §c§lSITE WEB §fwww.endoskull.fr
+    §r  §6§lBOUTIQUE §fboutique.endoskull.fr
+    §r  §9§lDISCORD §fdiscord.endoskull.fr
+    §r
+    §8§m+---------------***---------------+
+  shop-item: "§a§lBoutique"
+  profile-item: "§b§lProfil"
+  menu-item: "§a§lMenu de jeux"
+  cosmetics-item: "§e§lCosmétiques"
+  pearl-rider: "§2§lPearl Rider"
+  scoreboard: |-
+    §7{date} §8{server}
+    §1
+    §a§lProfil
+    §7 ╔§fGrade: §a{rank}
+    §7 ╠§fMoney: §a{coins}
+    §7 ╚§fBoost: §a+{boost}%
+    §4
+    §emc.endoskull.net
+  language: "§a§lLangue"
+  gui-language: "§c§lEndoSkull §8» §a§lLangue"
+  language-change: "§eEndoSkull §8» §7Vous avez changer votre langue en §a{lang}§7. Pour que ce paramètre soit complètement pris en compte veuillez vous §edécoonecter §7puis vous §ereconnecter§7."
+  key-vote: "Vote Key"
+  key-ultime: "Ultimate Key"
