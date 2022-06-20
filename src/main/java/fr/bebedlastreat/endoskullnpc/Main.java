@@ -11,12 +11,10 @@ import fr.bebedlastreat.endoskullnpc.scoreboard.BoardRunnable;
 import fr.bebedlastreat.endoskullnpc.scoreboard.FastBoard;
 import fr.bebedlastreat.endoskullnpc.tasks.HologramTask;
 import fr.bebedlastreat.endoskullnpc.tasks.ParkourTask;
-import fr.bebedlastreat.endoskullnpc.utils.HologramManager;
-import fr.bebedlastreat.endoskullnpc.utils.Parkour;
-import fr.bebedlastreat.endoskullnpc.utils.ParkourProgress;
-import fr.bebedlastreat.endoskullnpc.utils.NPCSpawnManager;
+import fr.bebedlastreat.endoskullnpc.utils.*;
 import fr.endoskull.api.spigot.utils.CustomGui;
 import fr.endoskull.api.spigot.utils.Languages;
+import me.leoko.advancedgui.manager.LayoutManager;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -97,6 +95,8 @@ public class Main extends JavaPlugin {
             }
         }
         fr.endoskull.api.Main.getInstance().reloadLangFiles();
+
+        LayoutManager.getInstance().registerLayoutExtension(new BoxLayout(), this);
 
         super.onEnable();
     }
