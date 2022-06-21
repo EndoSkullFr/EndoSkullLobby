@@ -46,8 +46,7 @@ public class PlayerManager {
         player.getInventory().setItem(8, getPearl(player));
         Account account = AccountProvider.getAccount(player.getUniqueId());
         player.setLevel(account.getLevel());
-        player.sendMessage(getXpToLevel(account.getLevel()) + " " + ((account.getXp()/account.xpToLevelSup()) + " " + account.getXp()/account.xpToLevelSup()*getXpToLevel(account.getLevel())));
-        player.setExp((float) (account.getXp()/account.xpToLevelSup()*getXpToLevel(account.getLevel())));
+        player.setExp((float) (account.getXp()/account.xpToLevelSup()));
     }
 
     public static void teleportToSpawn(Player player) {
