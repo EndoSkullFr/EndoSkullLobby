@@ -71,7 +71,7 @@ lobby:
   lobby-title: "§eVous êtes connecté sur le Lobby"
   lobby-message: |-
     §8§m+---------------***---------------+
-    "§r 
+    §r 
     §r    §7Bienvenue §b{player}§r §7sur le serveur
     §r 
     §r  §c§lSITE WEB §fwww.endoskull.fr
