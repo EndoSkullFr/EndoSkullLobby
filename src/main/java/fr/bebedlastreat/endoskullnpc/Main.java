@@ -68,7 +68,7 @@ public class Main extends JavaPlugin {
         getCommand("property").setExecutor(new PropertyCommand());
 
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new BoardRunnable(this), 60, 20);
-        HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -268.5, 63.585 + 1.96, -281.5)).appendTextLine("§d§lLOBBY");
+        HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -268.5, 62.65 + 1.96, -281.5)).appendTextLine("§d§lLOBBY");
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new HologramTask(), 60, 20);
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new ParkourTask(this), 60, 2);
 
