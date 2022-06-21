@@ -1,6 +1,7 @@
 package fr.bebedlastreat.endoskullnpc;
 
 import com.github.juliarn.npc.NPCPool;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import fr.bebedlastreat.endoskullnpc.commands.FlyCommand;
 import fr.bebedlastreat.endoskullnpc.commands.ProfileCommand;
 import fr.bebedlastreat.endoskullnpc.commands.PropertyCommand;
@@ -67,7 +68,7 @@ public class Main extends JavaPlugin {
         getCommand("property").setExecutor(new PropertyCommand());
 
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new BoardRunnable(this), 60, 20);
-        HologramManager.initHolograms();
+        HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -268.5, 63.585 + 1.96, -281.5)).appendTextLine("§d§lLOBBY");
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new HologramTask(), 60, 20);
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), new ParkourTask(this), 60, 2);
 

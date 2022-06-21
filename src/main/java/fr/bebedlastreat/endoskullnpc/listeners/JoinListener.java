@@ -2,6 +2,7 @@ package fr.bebedlastreat.endoskullnpc.listeners;
 
 import fr.bebedlastreat.endoskullnpc.Main;
 import fr.bebedlastreat.endoskullnpc.scoreboard.FastBoard;
+import fr.bebedlastreat.endoskullnpc.utils.HologramManager;
 import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.bebedlastreat.endoskullnpc.utils.PlayerManager;
 import fr.endoskull.api.spigot.utils.Languages;
@@ -44,6 +45,7 @@ public class JoinListener implements Listener {
         FastBoard board = new FastBoard(player);
         board.updateTitle("§a§lLOBBY");
         Main.getInstance().getBoards().add(board);
+        HologramManager.initHolograms(player);
     }
 
     @EventHandler
@@ -55,5 +57,6 @@ public class JoinListener implements Listener {
             board.delete();
             Main.getInstance().getBoards().remove(board);
         }
+        HologramManager.clear(player);
     }
 }

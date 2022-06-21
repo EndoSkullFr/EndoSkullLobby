@@ -98,3 +98,4 @@ lobby:
   language-change: "§eEndoSkull §8» §7Vous avez changer votre langue en §a{lang}§7. Pour que ce paramètre soit complètement pris en compte veuillez vous §edécoonecter §7puis vous §ereconnecter§7."
   key-vote: "Clé Vote"
   key-ultime: "Clé Ultime"
+  online: "§eConnecté(s): §6{amount}"
