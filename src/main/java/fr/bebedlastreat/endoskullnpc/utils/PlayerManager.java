@@ -44,6 +44,9 @@ public class PlayerManager {
         player.getInventory().setItem(4, menu.setName(lang.getMessage(LobbyMessage.MENU_ITEM)));
         player.getInventory().setItem(7, cosmetics.setName(lang.getMessage(LobbyMessage.COSMETICS_ITEM)));
         player.getInventory().setItem(8, getPearl(player));
+        Account account = AccountProvider.getAccount(player.getUniqueId());
+        player.setLevel(account.getLevel());
+        player.setExp((float) (account.xpToLevelSup()/account.getXp()*getXpToLevel(account.getLevel())));
     }
 
     public static void teleportToSpawn(Player player) {
@@ -82,5 +85,12 @@ public class PlayerManager {
         Account account = AccountProvider.getAccount(player.getUniqueId());
         ItemStack pearl = CustomItemStack.getSkull(PearlRider.valueOf(account.getProperty("pearl_rider_color", "Green").toUpperCase()).getUrl()).setName(Languages.getLang(player).getMessage(LobbyMessage.PEARL_RIDER));
         return pearl;
+    }
+
+    public static double getXpToLevel(int level) {
+        if (level <= 15) return 2*level + 7;
+        if (level <= 30) return 5*level - 38;
+        return 9*level - 158;
+
     }
 }
