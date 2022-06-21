@@ -15,13 +15,13 @@ public class HologramManager {
     private static Hologram lobby;
 
     public static void initHolograms(Player player) {
-        Hologram bedwarsHolo = HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -238.5, 63.585 + 1.96, -261.5));
+        Hologram bedwarsHolo = HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -238.5, 63.7 + 1.96, -261.5));
         bedwarsHolo.appendTextLine("");
         bedwarsHolo.appendTextLine("§a§lBEDWARS GOULAG");
         bedwarsHolo.getVisibilityManager().setVisibleByDefault(false);
         bedwarsHolo.getVisibilityManager().showTo(player);
         bedwars.put(player, bedwarsHolo);
-        Hologram pvpkitHolo = HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -246.5, 63.585 + 1.96, -253.5));
+        Hologram pvpkitHolo = HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -246.5, 63.7 + 1.96, -253.5));
         pvpkitHolo.appendTextLine("");
         pvpkitHolo.appendTextLine("§7✪ §6§lPvpKit §7✪");
         pvpkitHolo.getVisibilityManager().setVisibleByDefault(false);
