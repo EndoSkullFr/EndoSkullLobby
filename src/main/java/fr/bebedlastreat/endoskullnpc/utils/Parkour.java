@@ -103,7 +103,7 @@ public class Parkour {
         endHolo.appendTextLine("§a" + lang.getMessage(LobbyMessage.END));
         endHolo.getVisibilityManager().setVisibleByDefault(false);
         endHolo.getVisibilityManager().showTo(player);
-        endHolos.put(player, startHolo);
+        endHolos.put(player, endHolo);
     }
 
     public void clearHolo(Player player) {
