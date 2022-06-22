@@ -79,7 +79,7 @@ public class Parkour {
         Hologram holoEnd = new Hologram(end.clone().add(0.5, 0.5 + 1.975, 0.5), "§a" + name, "§aEND");
         holoEnd.spawn();*/
         Languages lang = Languages.getLang(player);
-        Hologram startHolo = HologramsAPI.createHologram(Main.getInstance(), start.clone().add(0.5, 0.5, 0.5));
+        Hologram startHolo = HologramsAPI.createHologram(Main.getInstance(), start.clone().add(0.5, 1, 0.5));
         startHolo.appendTextLine("§a" + name);
         startHolo.appendTextLine("§a" + lang.getMessage(LobbyMessage.START));
         startHolo.getVisibilityManager().setVisibleByDefault(false);
@@ -89,16 +89,16 @@ public class Parkour {
         checkpointsHolos.put(player, new ArrayList<>());
         int i = 1;
         for (Location checkPoint : checkPoints) {
-            Hologram checkPointHolo = HologramsAPI.createHologram(Main.getInstance(), checkPoint.clone().add(0.5, 0.5, 0.5));
-            checkPointHolo.appendTextLine("§a" + name);
-            checkPointHolo.appendTextLine("§a" + lang.getMessage(LobbyMessage.CHECKPOINT).replace("{id}", String.valueOf(i)));
+            Hologram checkPointHolo = HologramsAPI.createHologram(Main.getInstance(), checkPoint.clone().add(0.5, 1, 0.5));
+            checkPointHolo.appendTextLine("§e" + name);
+            checkPointHolo.appendTextLine("§e" + lang.getMessage(LobbyMessage.CHECKPOINT).replace("{id}", String.valueOf(i)));
             checkPointHolo.getVisibilityManager().setVisibleByDefault(false);
             checkPointHolo.getVisibilityManager().showTo(player);
             checkpointsHolos.get(player).add(checkPointHolo);
             i++;
         }
 
-        Hologram endHolo = HologramsAPI.createHologram(Main.getInstance(), end.clone().add(0.5, 0.5, 0.5));
+        Hologram endHolo = HologramsAPI.createHologram(Main.getInstance(), end.clone().add(0.5, 1, 0.5));
         endHolo.appendTextLine("§a" + name);
         endHolo.appendTextLine("§a" + lang.getMessage(LobbyMessage.END));
         endHolo.getVisibilityManager().setVisibleByDefault(false);
