@@ -101,5 +101,5 @@ lobby:
   online: "§eConnected: §6{amount}"
   parkour-bar: "§fParkour §a{parkour} §7■ §fCheckpoint §a#{checkpoint} §7■ §fTime: §a{time}"
   start: "START"
-  checkpoint: "CHECKPOINT"
+  checkpoint: "CHECKPOINT #{id}"
   end: "END"
