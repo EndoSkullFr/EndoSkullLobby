@@ -8,7 +8,9 @@ import fr.endoskull.api.commons.account.Account;
 import fr.endoskull.api.commons.account.AccountProvider;
 import fr.endoskull.api.spigot.utils.CustomGui;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
+import fr.endoskull.api.spigot.utils.LanguageChangeEvent;
 import fr.endoskull.api.spigot.utils.Languages;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -27,6 +29,8 @@ public class LanguageGUI extends CustomGui {
                 Account account = AccountProvider.getAccount(player.getUniqueId());
                 account.setLang(value);
                 Main.getLangs().put(player, value);
+                LanguageChangeEvent event = new LanguageChangeEvent(lang, value, player);
+                Bukkit.getPluginManager().callEvent(event);
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1);
                 player.sendMessage(value.getMessage(LobbyMessage.LANGUAGE_CHANGE).replace("{lang}", value.getName()));

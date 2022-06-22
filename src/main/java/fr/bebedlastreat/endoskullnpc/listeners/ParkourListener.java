@@ -5,6 +5,7 @@ import fr.bebedlastreat.endoskullnpc.database.ParkourSQL;
 import fr.bebedlastreat.endoskullnpc.inventories.GameMenuGUI;
 import fr.bebedlastreat.endoskullnpc.utils.*;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
+import fr.endoskull.api.spigot.utils.LanguageChangeEvent;
 import fr.endoskull.api.spigot.utils.Languages;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -205,5 +206,15 @@ public class ParkourListener implements Listener {
         player.getInventory().clear(6);
         player.getInventory().setItem(7, PlayerManager.getCosmetics());
         player.getInventory().setItem(8, PlayerManager.getPearl(player));
+    }
+
+    @EventHandler
+    public void onLangChange(LanguageChangeEvent e) {
+        if (e.getOldLang() == e.getNewLang()) return;
+        Player player = e.getPlayer();
+        for (Parkour parkour : main.getParkours()) {
+            parkour.clearHolo(player);
+            parkour.initHologram(player);
+        }
     }
 }
