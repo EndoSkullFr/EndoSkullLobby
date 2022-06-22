@@ -71,13 +71,13 @@ lobby:
   lobby-title: "§eYou're connected on the lobby"
   lobby-message: |-
     §8§m+---------------***---------------+
-    §r
+    §r 
     §r    §7Welcome §b{player}§r §7on the server
-    §r
+    §r 
     §r  §c§lWEB SITE §fwww.endoskull.fr
     §r  §6§lSHOP §fshop.endoskull.fr
     §r  §9§lDISCORD §fdiscord.endoskull.fr
-    §r
+    §r 
     §8§m+---------------***---------------+
   shop-item: "§a§lShop"
   profile-item: "§b§lProfile"
