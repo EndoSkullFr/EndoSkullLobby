@@ -99,3 +99,7 @@ lobby:
   key-vote: "Clé Vote"
   key-ultime: "Clé Ultime"
   online: "§eConnecté(s): §6{amount}"
+  parkour-bar: "§fParkour §a{parkour} §7■ §fCheckpoint §a#{checkpoint} §7■ §fTemps: §a{time}"
+  start: "DEBUT"
+  checkpoint: "CHECKPOINT #[id}"
+  end: "FIN"

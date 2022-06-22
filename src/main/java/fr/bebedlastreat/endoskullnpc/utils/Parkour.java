@@ -1,11 +1,14 @@
 package fr.bebedlastreat.endoskullnpc.utils;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import fr.bebedlastreat.endoskullnpc.Main;
 import fr.bebedlastreat.endoskullnpc.database.ParkourSQL;
-import fr.endoskull.api.spigot.utils.Hologram;
+import fr.endoskull.api.spigot.utils.Languages;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -17,6 +20,9 @@ public class Parkour {
     private List<Location> checkPoints;
     private Location end;
     private Location leaderboard;
+    private HashMap<Player, Hologram> startHolos;
+    private HashMap<Player, Hologram> endHolos;
+    private HashMap<Player, List<Hologram>> checkpointsHolos;
 
     public Parkour(String name, Location start, Location spawn, List<Location> checkPoints, Location end, Location leaderboard) {
         this.name = name;
@@ -25,7 +31,8 @@ public class Parkour {
         this.checkPoints = checkPoints;
         this.end = end;
         this.leaderboard = leaderboard;
-        initHologram();
+        hologram = new fr.endoskull.api.spigot.utils.Hologram(leaderboard, "§e§lEndoSkull §8§l» §f§lParkour §a§l" + name, "§c");
+        hologram.spawn();
         start.getBlock().setType(Material.STONE_PLATE);
         end.getBlock().setType(Material.IRON_PLATE);
         for (Location checkPoint : checkPoints) {
@@ -57,13 +64,11 @@ public class Parkour {
         return spawn;
     }
 
-    private Hologram hologram;
+    private fr.endoskull.api.spigot.utils.Hologram hologram;
 
-    public void initHologram() {
-        hologram = new Hologram(leaderboard, "§e§lEndoSkull §8§l» §f§lParkour §a§l" + name, "§c");
-        hologram.spawn();
+    public void initHologram(Player player) {
 
-        Hologram holoStart = new Hologram(start.clone().add(0.5, 0.5 + 1.975, 0.5), "§a" + name, "§aSTART");
+        /*Hologram holoStart = new Hologram(start.clone().add(0.5, 0.5 + 1.975, 0.5), "§a" + name, "§aSTART");
         holoStart.spawn();
         int i = 1;
         for (Location checkPoint : checkPoints) {
@@ -72,7 +77,50 @@ public class Parkour {
             i++;
         }
         Hologram holoEnd = new Hologram(end.clone().add(0.5, 0.5 + 1.975, 0.5), "§a" + name, "§aEND");
-        holoEnd.spawn();
+        holoEnd.spawn();*/
+        Languages lang = Languages.getLang(player);
+        Hologram startHolo = HologramsAPI.createHologram(Main.getInstance(), start.clone().add(0.5, 0.5, 0.5));
+        startHolo.appendTextLine("§a" + name);
+        startHolo.appendTextLine("§a" + lang.getMessage(LobbyMessage.START));
+        startHolo.getVisibilityManager().setVisibleByDefault(false);
+        startHolo.getVisibilityManager().showTo(player);
+        startHolos.put(player, startHolo);
+
+        checkpointsHolos.put(player, new ArrayList<>());
+        int i = 1;
+        for (Location checkPoint : checkPoints) {
+            Hologram checkPointHolo = HologramsAPI.createHologram(Main.getInstance(), checkPoint.clone().add(0.5, 0.5, 0.5));
+            checkPointHolo.appendTextLine("§a" + name);
+            checkPointHolo.appendTextLine("§a" + lang.getMessage(LobbyMessage.CHECKPOINT).replace("{id}", String.valueOf(i)));
+            checkPointHolo.getVisibilityManager().setVisibleByDefault(false);
+            checkPointHolo.getVisibilityManager().showTo(player);
+            checkpointsHolos.get(player).add(checkPointHolo);
+            i++;
+        }
+
+        Hologram endHolo = HologramsAPI.createHologram(Main.getInstance(), end.clone().add(0.5, 0.5, 0.5));
+        endHolo.appendTextLine("§a" + name);
+        endHolo.appendTextLine("§a" + lang.getMessage(LobbyMessage.END));
+        endHolo.getVisibilityManager().setVisibleByDefault(false);
+        endHolo.getVisibilityManager().showTo(player);
+        endHolos.put(player, startHolo);
+    }
+
+    public void clearHolo(Player player) {
+        if (startHolos.containsKey(player)) {
+            startHolos.get(player).delete();
+            startHolos.remove(player);
+        }
+        if (checkpointsHolos.containsKey(player)) {
+            for (Hologram holo : checkpointsHolos.get(player)) {
+                holo.delete();
+            }
+            checkpointsHolos.remove(player);
+        }
+        if (endHolos.containsKey(player)) {
+            endHolos.get(player).delete();
+            endHolos.remove(player);
+        }
     }
 
     public void updateHolograms() {

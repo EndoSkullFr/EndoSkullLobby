@@ -4,6 +4,7 @@ import fr.bebedlastreat.endoskullnpc.Main;
 import fr.bebedlastreat.endoskullnpc.scoreboard.FastBoard;
 import fr.bebedlastreat.endoskullnpc.utils.HologramManager;
 import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
+import fr.bebedlastreat.endoskullnpc.utils.Parkour;
 import fr.bebedlastreat.endoskullnpc.utils.PlayerManager;
 import fr.endoskull.api.spigot.utils.Languages;
 import net.luckperms.api.LuckPerms;
@@ -46,6 +47,9 @@ public class JoinListener implements Listener {
         board.updateTitle("§a§lLOBBY");
         Main.getInstance().getBoards().add(board);
         HologramManager.initHolograms(player);
+        for (Parkour parkour : Main.getInstance().getParkours()) {
+            parkour.initHologram(player);
+        }
     }
 
     @EventHandler
@@ -58,5 +62,8 @@ public class JoinListener implements Listener {
             Main.getInstance().getBoards().remove(board);
         }
         HologramManager.clear(player);
+        for (Parkour parkour : Main.getInstance().getParkours()) {
+            parkour.clearHolo(player);
+        }
     }
 }
