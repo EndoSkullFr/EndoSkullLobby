@@ -20,9 +20,9 @@ public class Parkour {
     private List<Location> checkPoints;
     private Location end;
     private Location leaderboard;
-    private HashMap<Player, Hologram> startHolos;
-    private HashMap<Player, Hologram> endHolos;
-    private HashMap<Player, List<Hologram>> checkpointsHolos;
+    private final HashMap<Player, Hologram> startHolos = new HashMap<>();
+    private final HashMap<Player, Hologram> endHolos = new HashMap<>();
+    private final HashMap<Player, List<Hologram>> checkpointsHolos = new HashMap<>();
 
     public Parkour(String name, Location start, Location spawn, List<Location> checkPoints, Location end, Location leaderboard) {
         this.name = name;
