@@ -32,7 +32,7 @@ public class GameMenuGUI extends CustomGui {
 
         setItem(23, CustomItemStack.getSkull("http://textures.minecraft.net/texture/fe6978cec1eaf5b90ae1531c30cd9cdc778d18ae25ed5296d224d9afdc089d2a")
                 .setName("§a§lBedwars Goulag")
-                .setLore(lang.getMessage(LobbyMessage.BEDWARS_DESC).replace("{online}", String.valueOf(ServiceInfoSnapshotUtil.getTaskOnlineCount("BedwarsSolo")))), player1 -> {
+                .setLore(lang.getMessage(LobbyMessage.BEDWARS_DESC).replace("{online}", String.valueOf(ServiceInfoSnapshotUtil.getTaskOnlineCount("Bedwars")))), player1 -> {
             player1.performCommand("join BedwarsSolo");
         });
     }
