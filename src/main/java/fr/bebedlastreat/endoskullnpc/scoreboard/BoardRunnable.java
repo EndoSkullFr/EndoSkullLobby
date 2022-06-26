@@ -54,7 +54,7 @@ public class BoardRunnable implements Runnable {
                         "§7 ╠§fMoney: §a" + account.getStringSolde(),
                         "§7 ╚§fBoost: §a+" + (int) (account.getBoost().getRealBooster() * 100 - 100) + "%",
                         "§4",
-                        "§emc.endoskull.fr");*/
+                        "§emc.endoskull.net");*/
                 int i = 0;
                 for (String line : lines) {
                     if (line.length() > 30) {
