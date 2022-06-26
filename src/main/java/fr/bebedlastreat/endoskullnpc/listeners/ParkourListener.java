@@ -113,9 +113,9 @@ public class ParkourListener implements Listener {
 
             }
             player.getInventory().setHeldItemSlot(8);
-            player.getInventory().setItem(6, cancelItem.setName(lang.getMessage(LobbyMessage.PARKOUR_LEAVE_ITEM)));
+            player.getInventory().setItem(8, cancelItem.setName(lang.getMessage(LobbyMessage.PARKOUR_LEAVE_ITEM)));
             player.getInventory().setItem(7, resetItem.setName(lang.getMessage(LobbyMessage.PARKOUR_RESET_ITEM)));
-            player.getInventory().setItem(8, checkpointItem.setName(lang.getMessage(LobbyMessage.PARKOUR_CHECKPOINT_ITEM)));
+            player.getInventory().setItem(6, checkpointItem.setName(lang.getMessage(LobbyMessage.PARKOUR_CHECKPOINT_ITEM)));
 
         }
     }
