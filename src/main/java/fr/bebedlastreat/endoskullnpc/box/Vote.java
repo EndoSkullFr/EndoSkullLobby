@@ -3,6 +3,7 @@ package fr.bebedlastreat.endoskullnpc.box;
 import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.endoskull.api.commons.lang.MessageUtils;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
+import fr.endoskull.api.spigot.utils.Languages;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -53,7 +54,7 @@ public enum Vote {
         return  getProbability() / (allProbability / 100);
     }
 
-    public static Vote getByName(String name) {
-        return Arrays.stream(values()).filter(r -> r.getName().equals(name)).findAny().orElse(Vote.COINS1);
+    public static Vote getByName(Languages lang, String name) {
+        return Arrays.stream(values()).filter(r -> lang.getMessage(r.getName()).equals(name)).findAny().orElse(Vote.COINS1);
     }
 }

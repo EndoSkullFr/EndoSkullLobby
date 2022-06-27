@@ -84,8 +84,8 @@ public class BoxVoteGUI extends CustomGui {
                 index++;
                 if (index > 50) {
                     player.playSound(player.getLocation(), Sound.LEVEL_UP, 50, 50);
-                    System.out.println("Clé vote " + player.getName() + " " + Vote.getByName(items.get(54).getItemMeta().getDisplayName()).getName());
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Vote.getByName(items.get(54).getItemMeta().getDisplayName()).getCommand().replace("%player%", player.getName()));
+                    System.out.println("Clé vote " + player.getName() + " " + Vote.getByName(lang, items.get(54).getItemMeta().getDisplayName()).getName());
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Vote.getByName(lang, items.get(54).getItemMeta().getDisplayName()).getCommand().replace("%player%", player.getName()));
                     player.sendMessage("");
                     player.sendMessage(lang.getMessage(LobbyMessage.VOTE_REWARD).replace("{reward}", items.get(54).getItemMeta().getDisplayName()));
                     player.sendMessage("");
