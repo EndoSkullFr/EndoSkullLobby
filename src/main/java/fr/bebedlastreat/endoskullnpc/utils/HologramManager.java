@@ -17,7 +17,7 @@ public class HologramManager {
     public static void initHolograms(Player player) {
         Hologram bedwarsHolo = HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("Lobby"), -238.5, 63.7 + 1.96, -261.5));
         bedwarsHolo.appendTextLine("");
-        bedwarsHolo.appendTextLine("§a§lBEDWARS GOULAG");
+        bedwarsHolo.appendTextLine("§a§lBEDWARS");
         bedwarsHolo.getVisibilityManager().setVisibleByDefault(false);
         bedwarsHolo.getVisibilityManager().showTo(player);
         bedwars.put(player, bedwarsHolo);

@@ -3,6 +3,7 @@ package fr.bebedlastreat.endoskullnpc.inventories;
 import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.endoskull.api.commons.account.Account;
 import fr.endoskull.api.commons.account.AccountProvider;
+import fr.endoskull.api.commons.lang.MessageUtils;
 import fr.endoskull.api.spigot.utils.CustomGui;
 import fr.endoskull.api.spigot.utils.CustomItemStack;
 import fr.endoskull.api.spigot.utils.Languages;
@@ -34,6 +35,14 @@ public class StatsGUI extends CustomGui {
         setItem(14, CustomItemStack.getSkull("http://textures.minecraft.net/texture/941466199b72cbc8889bb8a52e0f4ba13bcdd5fab97eeb948214187b62f0640d")
                 .setName("§aPvpKit").setLore(lang.getMessage(LobbyMessage.STAT_PVPKIT).replace("{kills}", String.valueOf(pvpkitKill)).replace("{deaths}", String.valueOf(pvpkitDeath))));
 
-        setItem(16, CustomItemStack.getSkull("http://textures.minecraft.net/texture/fe6978cec1eaf5b90ae1531c30cd9cdc778d18ae25ed5296d224d9afdc089d2a").setName("§aBedwars"));
+        int bwKill = account.getStatistic("bedwars/kill");
+        int bwFinalKill = account.getStatistic("bedwars/finalkill");
+        int bwDeath = account.getStatistic("bedwars/death");
+        int bwBedBroken = account.getStatistic("bedwars/bedbroken");
+        int bwGamePlayed = account.getStatistic("bedwars/gameplayed");
+        int bwWins = account.getStatistic("bedwars/win");
+        setItem(16, CustomItemStack.getSkull("http://textures.minecraft.net/texture/fe6978cec1eaf5b90ae1531c30cd9cdc778d18ae25ed5296d224d9afdc089d2a").setName("§aBedwars")
+                .setLore(lang.getMessage(LobbyMessage.STAT_BEDWARS).replace("{kills}", String.valueOf(bwKill)).replace("{finalKills}", String.valueOf(bwFinalKill)).replace("{deaths}", String.valueOf(bwDeath))
+                        .replace("{bedBroken}", String.valueOf(bwBedBroken)).replace("{gamePlayed}", String.valueOf(bwGamePlayed)).replace("{wins}", String.valueOf(bwWins))));
     }
 }

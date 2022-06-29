@@ -55,6 +55,7 @@ lobby:
   date: "§aDates"
   date-desc: "\n§7Première connexion: §e{firstLogin}\n§7Dernière connexion: §e{lastLogin}\n§7Dernière déconnexion: §e{lastLogout}"
   stat-pvpkit: "\n§7Kill(s): §e{kills}\n§7Mort(s): §e{deaths}"
+  stat-bedwars: "\n§7Kill(s): §e{kills}\n§7Final(s) Kill(s): §e{finalKills}\n§7Mort(s): §e{deaths}\n§7Lits(s) cassé(s): §e{bedBroken}\n§7Partie(s) jouée(s): §e{gamePlayed}\n§7Victoire(s): §e{wins}"
   join-message: "{player} §7vient de rejoindre le lobby"
   parkour-checkpoint-item: "§e§lDernier checkpoint"
   parkour-reset-item: "§6§lRecommencer"
