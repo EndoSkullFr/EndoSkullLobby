@@ -6,6 +6,8 @@ import fr.bebedlastreat.endoskullnpc.utils.HologramManager;
 import fr.bebedlastreat.endoskullnpc.utils.LobbyMessage;
 import fr.bebedlastreat.endoskullnpc.utils.Parkour;
 import fr.bebedlastreat.endoskullnpc.utils.PlayerManager;
+import fr.endoskull.api.commons.account.Account;
+import fr.endoskull.api.commons.account.AccountProvider;
 import fr.endoskull.api.spigot.utils.Languages;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -23,24 +25,31 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        e.setJoinMessage(null);
         PlayerManager.resetPlayer(player);
         PlayerManager.spawnFirework();
 
-        if (player.hasPermission("deluxehub.join.message")) {
-            LuckPerms luckPerms = LuckPermsProvider.get();
-            User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-            //e.setJoinMessage(ChatColor.translateAlternateColorCodes('&',  + " §7vient de rejoindre le lobby"));
-            e.setJoinMessage(null);
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                onlinePlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', Languages.getLang(onlinePlayer).getMessage(LobbyMessage.JOIN_MESSAGE).replace("{player}", user.getCachedData().getMetaData().getPrefix() + player.getName())));
-            }
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                if (player == null) return;
-                //player.setAllowFlight(true);
-                //player.setFlying(true);
-            }, 10);
+        Account account = AccountProvider.getAccount(player.getUniqueId());
+        if (account.getProperty("bedwars/playagain", "").equalsIgnoreCase("1")) {
+            account.setProperty("bedwars/playagin", "0");
+            player.performCommand("join Bedwars");
         } else {
-            e.setJoinMessage(null);
+            if (player.hasPermission("deluxehub.join.message")) {
+                LuckPerms luckPerms = LuckPermsProvider.get();
+                User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
+                //e.setJoinMessage(ChatColor.translateAlternateColorCodes('&',  + " §7vient de rejoindre le lobby"));
+                e.setJoinMessage(null);
+                for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    onlinePlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', Languages.getLang(onlinePlayer).getMessage(LobbyMessage.JOIN_MESSAGE).replace("{player}", user.getCachedData().getMetaData().getPrefix() + player.getName())));
+                }
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                    if (player == null) return;
+                    //player.setAllowFlight(true);
+                    //player.setFlying(true);
+                }, 10);
+            } else {
+                e.setJoinMessage(null);
+            }
         }
 
         FastBoard board = new FastBoard(player);
