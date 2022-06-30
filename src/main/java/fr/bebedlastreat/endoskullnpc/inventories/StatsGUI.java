@@ -41,8 +41,9 @@ public class StatsGUI extends CustomGui {
         int bwBedBroken = account.getStatistic("bedwars/bedbroken");
         int bwGamePlayed = account.getStatistic("bedwars/gameplayed");
         int bwWins = account.getStatistic("bedwars/win");
+        int bwGoulagWins = account.getStatistic("bedwars/goulagwin");
         setItem(16, CustomItemStack.getSkull("http://textures.minecraft.net/texture/fe6978cec1eaf5b90ae1531c30cd9cdc778d18ae25ed5296d224d9afdc089d2a").setName("§aBedwars")
                 .setLore(lang.getMessage(LobbyMessage.STAT_BEDWARS).replace("{kills}", String.valueOf(bwKill)).replace("{finalKills}", String.valueOf(bwFinalKill)).replace("{deaths}", String.valueOf(bwDeath))
-                        .replace("{bedBroken}", String.valueOf(bwBedBroken)).replace("{gamePlayed}", String.valueOf(bwGamePlayed)).replace("{wins}", String.valueOf(bwWins))));
+                        .replace("{bedBroken}", String.valueOf(bwBedBroken)).replace("{gamePlayed}", String.valueOf(bwGamePlayed)).replace("{wins}", String.valueOf(bwWins)).replace("{goulagWins}", String.valueOf(bwGoulagWins))));
     }
 }
