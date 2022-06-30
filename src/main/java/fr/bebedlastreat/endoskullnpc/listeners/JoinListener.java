@@ -31,7 +31,7 @@ public class JoinListener implements Listener {
 
         Account account = AccountProvider.getAccount(player.getUniqueId());
         if (account.getProperty("bedwars/playagain", "").equalsIgnoreCase("1")) {
-            account.setProperty("bedwars/playagin", "0");
+            account.setProperty("bedwars/playagain", "0");
             player.performCommand("join Bedwars");
         } else {
             if (player.hasPermission("deluxehub.join.message")) {
